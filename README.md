@@ -14,11 +14,14 @@ The following commands at each step can be run in the terminal on VSCode. For it
 
 2. Make your changes in the desired documents
 
-3. You can then add these changes.
+3. Save the changes.
+   Use: **CTRL + S**
+
+4. You can then add these changes.
    Use: **git add --all**
 
-4. Commit these changes (to your local copy of the repository)
+5. Commit these changes (to your local copy of the repository)
    Use: **git commit -m "commit_message_here"**
 
-5. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub
+6. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub
    Use: **git push**
