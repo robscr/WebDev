@@ -25,3 +25,5 @@ The following commands at each step can be run in the terminal on VSCode. For it
 
 6. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub
    Use: **git push**
+
+Be sure to commit regularly, to provide robust version control. Probably also a good idea to only change one document at a time between commits.
