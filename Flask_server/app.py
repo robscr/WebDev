@@ -9,7 +9,7 @@ def init_game():
 
 @app.route("/placeholder")
 def placeholder():
-    return redirect(url_for('Flask-server', filename="placeholder.html"))
+    return redirect(url_for('static', filename="placeholder.html"))
 
 if __name__ == "__main__":
     app.run()
