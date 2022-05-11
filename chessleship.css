@@ -1,5 +1,5 @@
 td {
-    background-color: grey;
+    background-color: rgb(158, 201, 158);
     text-transform:uppercase;
     min-height: 100%;
     width: 100px;
@@ -26,15 +26,15 @@ td {
   }
   
   .selected {
-    background-color: rgb(216, 216, 216);
+    filter: grayscale(80%);
   }
   
   .empty {
     background-color: rgb(0, 0, 0);
   }
 
-  .flag {
-    /*insert formatting later */
+  .flagged {
+    background-color: rgb(255, 0, 179);
   }
 
   h1,h2 {

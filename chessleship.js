@@ -1,7 +1,7 @@
-//Enumerate values for empty, targeted and occupied cells
+//Enumerate values for empty, and occupied cells
+//If a cell has any other value is is targeted by that number of pieces
 const empty = 0;
-const targeted = 1;
-const occupied = 2;
+const occupied = 99;
 
 //Set size of board
 const ROWNUM = 8;
@@ -29,13 +29,13 @@ function initialiseEmpty() {
  */
 function initBoard(rownum, columnnum) {
   let table = document.getElementById("board");
-  var tablebody = document.createElement('tbody');
+  var tablebody = document.createElement("tbody");
   table.appendChild(tablebody);
   for (var i = 0; i < rownum; i++) {
-    var row = document.createElement('tr');
+    var row = document.createElement("tr");
     tablebody.appendChild(row);
     for (var j = 0; j < columnnum; j++) {
-      var cell = document.createElement('td');
+      var cell = document.createElement("td");
       cell.classList.add("hidden");
       cell.setAttribute("onclick", "selectCell(this)");
       row.appendChild(cell);
@@ -87,7 +87,7 @@ function placeKing(row, column) {
         isValidCell(targetedCellRow, targetedCellColumn) &&
         positionArray[targetedCellRow][targetedCellColumn] != occupied
       ) {
-        positionArray[targetedCellRow][targetedCellColumn] = targeted;
+        positionArray[targetedCellRow][targetedCellColumn] += 1;
       }
     }
   }
@@ -98,10 +98,10 @@ function placeRook(row, column) {
   for (var i = 0; i < positionArray.length; i++) {
     //Assigns all cells either on the same row or same column of the occupied as targeted, except for the occupied cell itself
     if (positionArray[row][i] != occupied) {
-      positionArray[row][i] = targeted;
+      positionArray[row][i] += 1;
     }
     if (positionArray[i][column] != occupied) {
-      positionArray[i][column] = targeted;
+      positionArray[i][column] += 1;
     }
   }
 }
@@ -115,7 +115,7 @@ function placeBishop(row, column) {
       isValidCell(targetedCellRow, targetedCellColumn) &&
       positionArray[targetedCellRow][targetedCellColumn] != occupied
     ) {
-      positionArray[targetedCellRow][targetedCellColumn] = targeted;
+      positionArray[targetedCellRow][targetedCellColumn] += 1;
     }
     //Assign targeted cells for upward sloping diagonal (i.e. those with coordinates (row+i, column-i)
     let targetedCellColumnAlt = column - i;
@@ -123,7 +123,7 @@ function placeBishop(row, column) {
       isValidCell(targetedCellRow, targetedCellColumnAlt) &&
       positionArray[targetedCellRow][targetedCellColumnAlt] != occupied
     ) {
-      positionArray[targetedCellRow][targetedCellColumnAlt] = targeted;
+      positionArray[targetedCellRow][targetedCellColumnAlt] += 1;
     }
   }
 }
@@ -164,12 +164,13 @@ function showPositions() {
           cell.classList.add("occupied");
           break;
 
-        case targeted:
-          cell.classList.add("targeted");
-          break;
-
         case empty:
           //console.log("nothing");
+          break;
+
+        default:
+          cell.classList.add("targeted");
+          cell.innerHTML = positionArray[i][j];
           break;
       }
     }
@@ -204,13 +205,14 @@ function guess() {
           case occupied:
             cell.classList.add("occupied");
             break;
-
-          case targeted:
-            cell.classList.add("targeted");
-            break;
-
+  
           case empty:
             cell.classList.add("empty");
+            break;
+  
+          default:
+            cell.classList.add("targeted");
+            cell.innerHTML = positionArray[i][j];
             break;
         }
       }
@@ -219,6 +221,28 @@ function guess() {
 }
 
 function main() {
+  generateGameParameters(generateSeed());
+
+  myRandomNumbers = aleaPRNG(222222);
+  console.log("first generator number 1:" + 10 ** 15 * myRandomNumbers());
+  console.log("first generator number 2:" + myRandomNumbers());
+  console.log("first generator number 3:" + myRandomNumbers());
+
+  myRandomNumbers2 = aleaPRNG(222223);
+  console.log("first generator number 1:" + myRandomNumbers2());
+  console.log("first generator number 2:" + myRandomNumbers2());
+  console.log("first generator number 3:" + myRandomNumbers2());
+
+  myRandomNumbers3 = aleaPRNG(222223);
+  console.log("first generator number 1:" + myRandomNumbers3());
+  console.log("first generator number 2:" + myRandomNumbers3());
+  console.log("first generator number 3:" + myRandomNumbers3());
+
+  myRandomNumbers4 = aleaPRNG(222223);
+  console.log("first generator number 1:" + myRandomNumbers4());
+  console.log("first generator number 2:" + myRandomNumbers4());
+  console.log("first generator number 3:" + myRandomNumbers4());
+
   //Test if array is working
   for (var i = 0; i < positionArray.length; i++) {
     console.log(positionArray[i]);
@@ -227,11 +251,12 @@ function main() {
   //Initialises right click functionality
   initialiseRightClickEvent();
 
+  placeQueen(4, 4);
   //Place king at coords (4,3)
-  placeQueen(4, 3);
+  placeKing(2, 5);
   //Place rook at coords (5,2)
-  //placeRook(5, 2);
+  placeRook(7, 4);
   //Place bishop at coords (3,5)
-  //placeBishop(3, 5);
+  placeBishop(1, 1);
   //showPositions();
 }
