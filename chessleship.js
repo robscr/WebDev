@@ -70,6 +70,33 @@ function initialiseRightClickEvent() {
   }
 }
 
+function initialisePieces(pieceArray) {
+  for (var i = 0; i < pieceArray.length; i++) {
+    let type = pieceArray[i][0];
+    let location = pieceArray[i][1];
+    let pieceRow = Math.floor(location / ROWNUM);
+    let pieceColumn = location % COLUMNNUM;
+    switch (type) {
+      case 1:
+        placeKing(pieceRow, pieceColumn);
+        break;
+
+      case 2:
+        placeQueen(pieceRow, pieceColumn);
+        break;
+
+      case 3:
+        placeRook(pieceRow, pieceColumn);
+        break;
+
+      case 4:
+        placeBishop(pieceRow, pieceColumn);
+        break;
+        
+    }
+  }
+}
+
 /**
  * Sets the cell referenced by input row and column as being occupied, and all surrounding adjacent cells as being targeted
  * @param {*} row the row that the piece will be placed in
@@ -205,11 +232,11 @@ function guess() {
           case occupied:
             cell.classList.add("occupied");
             break;
-  
+
           case empty:
             cell.classList.add("empty");
             break;
-  
+
           default:
             cell.classList.add("targeted");
             cell.innerHTML = positionArray[i][j];
@@ -221,42 +248,16 @@ function guess() {
 }
 
 function main() {
-  generateGameParameters(generateSeed());
+  var pieceInfoArray = generateGameParameters(generateSeed());
 
-  myRandomNumbers = aleaPRNG(222222);
-  console.log("first generator number 1:" + 10 ** 15 * myRandomNumbers());
-  console.log("first generator number 2:" + myRandomNumbers());
-  console.log("first generator number 3:" + myRandomNumbers());
-
-  myRandomNumbers2 = aleaPRNG(222223);
-  console.log("first generator number 1:" + myRandomNumbers2());
-  console.log("first generator number 2:" + myRandomNumbers2());
-  console.log("first generator number 3:" + myRandomNumbers2());
-
-  myRandomNumbers3 = aleaPRNG(222223);
-  console.log("first generator number 1:" + myRandomNumbers3());
-  console.log("first generator number 2:" + myRandomNumbers3());
-  console.log("first generator number 3:" + myRandomNumbers3());
-
-  myRandomNumbers4 = aleaPRNG(222223);
-  console.log("first generator number 1:" + myRandomNumbers4());
-  console.log("first generator number 2:" + myRandomNumbers4());
-  console.log("first generator number 3:" + myRandomNumbers4());
-
-  //Test if array is working
-  for (var i = 0; i < positionArray.length; i++) {
-    console.log(positionArray[i]);
+  // //Test if array is working
+  for (var k = 0; k < pieceInfoArray.length; k++) {
+    console.log(pieceInfoArray[k]);
   }
   initBoard(ROWNUM, COLUMNNUM);
   //Initialises right click functionality
   initialiseRightClickEvent();
 
-  placeQueen(4, 4);
-  //Place king at coords (4,3)
-  placeKing(2, 5);
-  //Place rook at coords (5,2)
-  placeRook(7, 4);
-  //Place bishop at coords (3,5)
-  placeBishop(1, 1);
-  //showPositions();
+  initialisePieces(pieceInfoArray);
+
 }
