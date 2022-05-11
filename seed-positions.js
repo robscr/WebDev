@@ -8,7 +8,7 @@ const knight = 5; //optional implementation
 function generateSeed() {
   const date = new Date();
   const dateseedstring =
-    date.getDate() + (date.getMonth() + 1) + date.getFullYear();
+  "" + date.getDate() + (date.getMonth() + 1) + date.getFullYear();
   dateseed = parseInt(dateseedstring);
   console.log("The dateseed is: " + dateseed);
   return dateseed;
