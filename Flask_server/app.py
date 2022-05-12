@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def init_game():
-    return "<h1>Test Flask</h1>"
+    return "<h1>This is app.py</h1>"
 
 @app.route("/placeholder")
 def placeholder():

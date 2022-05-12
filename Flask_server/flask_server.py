@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def init_game():
-    return "<h1>Test</h1>"
+    return "<h1>This is flask_server.py</h1>"
 
 if __name__ == "__main__":
     app.run()
