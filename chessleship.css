@@ -37,6 +37,10 @@ td {
     background-color: rgb(255, 0, 179);
   }
 
+  .found {
+    filter: grayscale(80%);
+  }
+
   h1,h2 {
     text-align: center;
     font-family: Sans-serif;
