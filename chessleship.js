@@ -9,6 +9,7 @@ const COLUMNNUM = 8;
 
 //Initialise empty array
 var positionArray = initialiseEmpty();
+var testArray = new Array;
 
 //Initialises a 2D array (array of arrays) that contains information about the status of each cell (empty, targeted or occupied)
 function initialiseEmpty() {
@@ -189,10 +190,11 @@ function showPositions() {
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
+          cell.innerHTML = checkPiece(i,j,testArray);
           break;
 
         case empty:
-          //console.log("nothing");
+          //cell.classList.add("empty");
           break;
 
         default:
@@ -246,9 +248,24 @@ function guess() {
     }
   }
 }
+/**
+ * Checks the type of piece that is on the cell located by parameters row and column
+ * @param {*} row 
+ * @param {*} column 
+ */
+function checkPiece(row,column,pieceInfoArray) {
+  let pieceLocation = row*ROWNUM+column;
+  for (var i = 0; i < pieceInfoArray.length; i++) {
+    if (pieceInfoArray[i][1] == pieceLocation) {
+      return pieceInfoArray[i][0];
+    }
+  }
+  return 0;
+}
 
 function main() {
   var pieceInfoArray = generateGameParameters(generateSeed());
+  testArray = pieceInfoArray;
 
   // //Test if array is working
   for (var k = 0; k < pieceInfoArray.length; k++) {
