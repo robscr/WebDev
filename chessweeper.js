@@ -37,6 +37,7 @@ function initBoard(rownum, columnnum) {
     for (var j = 0; j < columnnum; j++) {
       var cell = document.createElement('td');
       cell.classList.add("hidden");
+      // cell.classList.add("ratio ratio-1x1")
       cell.setAttribute("onclick", "selectCell(this)");
       row.appendChild(cell);
     }
