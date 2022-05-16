@@ -8,8 +8,8 @@ const ROWNUM = 8;
 const COLUMNNUM = 8;
 
 //Initialise empty array
-var positionArray = initialiseEmpty();
-var testArray = new Array;
+var positionArray = new Array;
+var pieceInfoArray = new Array;
 
 //Initialises a 2D array (array of arrays) that contains information about the status of each cell (empty, targeted or occupied)
 function initialiseEmpty() {
@@ -20,7 +20,7 @@ function initialiseEmpty() {
       initArray[i][j] = empty;
     }
   }
-  return initArray;
+  return initArray;git 
 }
 
 /**
@@ -30,17 +30,31 @@ function initialiseEmpty() {
  */
 function initBoard(rownum, columnnum) {
   let table = document.getElementById("board");
-  var tablebody = document.createElement("tbody");
+  let tablebody = document.createElement("tbody");
   table.appendChild(tablebody);
   for (var i = 0; i < rownum; i++) {
-    var row = document.createElement("tr");
+    let row = document.createElement("tr");
     tablebody.appendChild(row);
     for (var j = 0; j < columnnum; j++) {
-      var cell = document.createElement("td");
+      let cell = document.createElement("td");
       cell.classList.add("hidden");
       cell.setAttribute("onclick", "selectCell(this)");
       row.appendChild(cell);
     }
+  }
+}
+
+/**
+ * Creates table elements each showing a piece that is on the grid
+ */
+ function initialisePieceTable() {
+  let table = document.getElementById("piecetable");
+  let tablebody = document.createElement("tbody");
+  table.appendChild(tablebody);
+  for (var i = 0; i < pieceInfoArray.length; i++) {
+    let cell = document.createElement("td");
+    cell.innerHTML = pieceInfoArray[i][0];
+    tablebody.appendChild(cell);
   }
 }
 
@@ -187,14 +201,16 @@ function showPositions() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
       cell = document.getElementById("board").rows[i].cells[j];
+      cell.classList.add("guessed");
+      cell.classList.remove("selected");
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
-          cell.innerHTML = checkPiece(i,j,testArray);
+          cell.innerHTML = checkPiece(i,j,pieceInfoArray);
           break;
 
         case empty:
-          //cell.classList.add("empty");
+          cell.classList.add("empty");
           break;
 
         default:
@@ -213,10 +229,10 @@ function showPositions() {
 function selectCell(cell) {
   var rowIndex = cell.parentNode.rowIndex;
   var columnIndex = cell.cellIndex;
-  if (cell.classList.contains("selected")) {
-    cell.classList.remove("selected");
-  } else {
+  if (!cell.classList.contains("selected") && !cell.classList.contains("guessed")) {
     cell.classList.add("selected");
+  } else {
+    cell.classList.remove("selected");
   }
 }
 
@@ -230,6 +246,7 @@ function guess() {
       cell = document.getElementById("board").rows[i].cells[j];
       if (cell.classList.contains("selected")) {
         cell.classList.remove("selected");
+        cell.classList.add("guessed");
         switch (positionArray[i][j]) {
           case occupied:
             cell.classList.add("occupied");
@@ -263,9 +280,11 @@ function checkPiece(row,column,pieceInfoArray) {
   return 0;
 }
 
+
 function main() {
-  var pieceInfoArray = generateGameParameters(generateSeed());
-  testArray = pieceInfoArray;
+  positionArray = initialiseEmpty();
+  pieceInfoArray = generateGameParameters(generateSeed());
+  initialisePieceTable();
 
   // //Test if array is working
   for (var k = 0; k < pieceInfoArray.length; k++) {
