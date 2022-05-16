@@ -80,20 +80,26 @@ function initialiseRightClickEvent() {
       cell.addEventListener("contextmenu", (event) => {
         //Prevents the context menu from popping up over board
         event.preventDefault();
-        //Console log test commands
-        /*console.log(event.button);
-        console.log("column is " + event.target.cellIndex);*/
 
+        let row = event.target.parentNode.rowIndex;
+        let column = event.target.cellIndex;
+
+        flag(row, column, event);
         //Assigns a flag to a cell if it does not already have a flag, otherwise removes the flag
-        if (event.target.innerHTML == "") {
-          event.target.innerHTML = "F";
-          event.target.classList.add("flagged");
-        } else {
-          event.target.innerHTML = "";
-          event.target.classList.remove("flagged");
-        }
+        
       });
     }
+  }
+}
+function flag(row, column, event) {
+  flagArray[row][column]++;
+  let currentFlag = (flagArray[row][column])%pieceSymbolArray.length;
+  event.target.innerHTML = pieceSymbolArray[currentFlag];
+  if (currentFlag != 0) {
+    event.target.classList.add("flagged");
+  }
+  else {
+    event.target.classList.remove("flagged");
   }
 }
 
@@ -369,6 +375,7 @@ function pieceNumberToType(number) {
 function main() {
   positionArray = initialiseEmpty();
   pieceInfoArray = generateGameParameters(generateSeed());
+  flagArray = initialiseEmpty();
   initialisePieceTable();
 
   // //Test if array is working
