@@ -34,7 +34,7 @@ td {
   }
 
   .flagged {
-    background-color: rgb(255, 0, 179);
+    /* background-color: rgb(255, 0, 179); */
   }
 
   .found {

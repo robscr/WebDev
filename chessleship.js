@@ -11,12 +11,15 @@ const COLUMNNUM = 8;
 const NUMGUESSPERTURN = 8;
 const NUMTURNS = 6;
 
+const pieceSymbolArray = ['', 'K', 'Q', 'R', 'B'];
+
 var turnCounter = 0;
 var guessCounter = 0;
 
 //Initialise empty arrays
 var positionArray = new Array; //Contains information about whether cells are occupied/targeted/empty and the number of pieces targeting targeted cells
 var pieceInfoArray = new Array; //Contains information about the type of pieces on the board and their location
+var flagArray = new Array; //Contains information about the type of flag that is in each cell
 
 //Initialises a 2D array (array of arrays) that contains information about the status of each cell (empty, targeted or occupied)
 function initialiseEmpty() {
@@ -27,7 +30,7 @@ function initialiseEmpty() {
       initArray[i][j] = empty;
     }
   }
-  return initArray;git 
+  return initArray;
 }
 
 /**
@@ -73,7 +76,7 @@ function initBoard(rownum, columnnum) {
 function initialiseRightClickEvent() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
       cell.addEventListener("contextmenu", (event) => {
         //Prevents the context menu from popping up over board
         event.preventDefault();
@@ -210,13 +213,13 @@ function isValidCell(row, column) {
 function showPositions() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
       cell.classList.add("guessed");
       cell.classList.remove("selected");
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
-          cell.innerHTML = checkPieceType(i,j,pieceInfoArray);
+          cell.innerHTML = pieceNumberToType(checkPieceType(i,j,pieceInfoArray));
           break;
 
         case empty:
@@ -225,8 +228,7 @@ function showPositions() {
 
         default:
           cell.classList.add("targeted");
-          //cell.innerHTML = positionArray[i][j];
-          cell.innerHTML = "";
+          cell.innerHTML = positionArray[i][j];
           break;
       }
     }
@@ -258,12 +260,13 @@ function selectCell(cell) {
 function guess() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
       if (cell.classList.contains("selected")) {
         cell.classList.remove("selected");
         cell.classList.add("guessed");
         switch (positionArray[i][j]) {
           case occupied:
+            removePiece(i, j, pieceInfoArray);
             cell.classList.add("occupied");
             cell.innerHTML = pieceNumberToType(checkPieceType(i,j,pieceInfoArray));
             break;
@@ -327,7 +330,7 @@ function removePiece(row, column, pieceInfoArray) {
 }
 function removeFromPieceTable(pieceType, pieceInfoArray) {
   for (var i = 0; i < pieceInfoArray.length; i++) {
-    cell = document.getElementById("piecetable").rows[0].cells[i];
+    let cell = document.getElementById("piecetable").rows[0].cells[i];
     if (pieceType == pieceInfoArray[i][0] && !cell.classList.contains("found")) {
       cell.classList.add("found");
       return;
@@ -339,7 +342,7 @@ function removeFromPieceTable(pieceType, pieceInfoArray) {
 function updateBoard() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
       if (cell.classList.contains("targeted")) {
         cell.innerHTML = positionArray[i][j];
       }
