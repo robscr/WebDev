@@ -36,6 +36,8 @@ td {
     color: white;
     text-align: center;
     font-family: Sans-serif;
+    width: 12.5%;
+    height: 12.5%;
   }
 
   tr:nth-child(even) td:nth-child(even), tr:nth-child(odd) td:nth-child(odd) {

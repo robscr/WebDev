@@ -12,7 +12,7 @@ const NUMGUESSPERTURN = 8;
 const NUMTURNS = 6;
 
 const pieceSymbolArray = ["", "K", "Q", "R", "B"];
-
+//For rob to Change to 
 var turnCounter = 0;
 var guessCounter = 0;
 
