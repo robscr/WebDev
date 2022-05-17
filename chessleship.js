@@ -7,8 +7,19 @@ const occupied = 99;
 const ROWNUM = 8;
 const COLUMNNUM = 8;
 
-//Initialise empty array
-var positionArray = initialiseEmpty();
+//Sets the number of guesses allowed per turn as well as number of turns
+const NUMGUESSPERTURN = 8;
+const NUMTURNS = 6;
+
+const pieceSymbolArray = ["", "K", "Q", "R", "B"];
+
+var turnCounter = 0;
+var guessCounter = 0;
+
+//Initialise empty arrays
+var positionArray = new Array(); //Contains information about whether cells are occupied/targeted/empty and the number of pieces targeting targeted cells
+var pieceInfoArray = new Array(); //Contains information about the type of pieces on the board and their location
+var flagArray = new Array(); //Contains information about the type of flag that is in each cell
 
 //Initialises a 2D array (array of arrays) that contains information about the status of each cell (empty, targeted or occupied)
 function initialiseEmpty() {
@@ -29,18 +40,36 @@ function initialiseEmpty() {
  */
 function initBoard(rownum, columnnum) {
   let table = document.getElementById("board");
-  var tablebody = document.createElement("tbody");
+  let tablebody = document.createElement("tbody");
   table.appendChild(tablebody);
   for (var i = 0; i < rownum; i++) {
-    var row = document.createElement("tr");
+    let row = document.createElement("tr");
     tablebody.appendChild(row);
     for (var j = 0; j < columnnum; j++) {
-      var cell = document.createElement("td");
+      let cell = document.createElement("td");
       cell.classList.add("hidden");
       // cell.classList.add("ratio ratio-1x1")
       cell.setAttribute("onclick", "selectCell(this)");
+      cell.innerHTML = " ";
       row.appendChild(cell);
     }
+  }
+}
+
+/**
+ * Creates table elements each showing a piece that is on the grid
+ */
+function initialisePieceTable() {
+  let table = document.getElementById("piecetable");
+  let tablebody = document.createElement("tbody");
+  table.appendChild(tablebody);
+  let row = document.createElement("tr");
+  tablebody.appendChild(row);
+  for (var i = 0; i < pieceInfoArray.length; i++) {
+    let cell = document.createElement("td");
+    cell.innerHTML = " ";
+    cell.firstChild.nodeValue = pieceNumberToType(pieceInfoArray[i][0]);
+    row.appendChild(cell);
   }
 }
 
@@ -50,22 +79,16 @@ function initBoard(rownum, columnnum) {
 function initialiseRightClickEvent() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
       cell.addEventListener("contextmenu", (event) => {
         //Prevents the context menu from popping up over board
         event.preventDefault();
-        //Console log test commands
-        /*console.log(event.button);
-        console.log("column is " + event.target.cellIndex);*/
 
+        let row = event.target.parentNode.rowIndex;
+        let column = event.target.cellIndex;
+
+        flag(row, column, event);
         //Assigns a flag to a cell if it does not already have a flag, otherwise removes the flag
-        if (event.target.innerHTML == "") {
-          event.target.innerHTML = "F";
-          event.target.classList.add("flagged");
-        } else {
-          event.target.innerHTML = "";
-          event.target.classList.remove("flagged");
-        }
       });
     }
   }
@@ -93,7 +116,6 @@ function initialisePieces(pieceArray) {
       case 4:
         placeBishop(pieceRow, pieceColumn);
         break;
-        
     }
   }
 }
@@ -102,39 +124,40 @@ function initialisePieces(pieceArray) {
  * Sets the cell referenced by input row and column as being occupied, and all surrounding adjacent cells as being targeted
  * @param {*} row the row that the piece will be placed in
  * @param {*} column the column that the piece will be placed in
+ * @param {*} addOrRemove has a value of 1 (default) if adding a piece to board and -1 if removing piece
  */
-function placeKing(row, column) {
+function placeKing(row, column, addOrRemove = 1) {
   positionArray[row][column] = occupied;
   //Iterate through a 3x3 grid of cells surrounding the king's location, and assigns these as targeted if valid to do so
   for (var i = -1; i < 2; i++) {
     for (var j = -1; j < 2; j++) {
       let targetedCellRow = row + i;
       let targetedCellColumn = column + j;
-      //Checks if cell is on the board and not occupied, and if these checks are met assigns that cell as targeted
+      //Checks if cell is on the board and not occupied, and if these checks are met assigns that cell as targeted and adds 1 to the count of pieces targeting that cell
       if (
         isValidCell(targetedCellRow, targetedCellColumn) &&
         positionArray[targetedCellRow][targetedCellColumn] != occupied
       ) {
-        positionArray[targetedCellRow][targetedCellColumn] += 1;
+        positionArray[targetedCellRow][targetedCellColumn] += addOrRemove;
       }
     }
   }
 }
 
-function placeRook(row, column) {
+function placeRook(row, column, addOrRemove = 1) {
   positionArray[row][column] = occupied;
   for (var i = 0; i < positionArray.length; i++) {
     //Assigns all cells either on the same row or same column of the occupied as targeted, except for the occupied cell itself
     if (positionArray[row][i] != occupied) {
-      positionArray[row][i] += 1;
+      positionArray[row][i] += addOrRemove;
     }
     if (positionArray[i][column] != occupied) {
-      positionArray[i][column] += 1;
+      positionArray[i][column] += addOrRemove;
     }
   }
 }
 
-function placeBishop(row, column) {
+function placeBishop(row, column, addOrRemove = 1) {
   positionArray[row][column] = occupied;
   for (var i = 1 - positionArray.length; i < positionArray.length; i++) {
     let targetedCellRow = row + i;
@@ -143,7 +166,7 @@ function placeBishop(row, column) {
       isValidCell(targetedCellRow, targetedCellColumn) &&
       positionArray[targetedCellRow][targetedCellColumn] != occupied
     ) {
-      positionArray[targetedCellRow][targetedCellColumn] += 1;
+      positionArray[targetedCellRow][targetedCellColumn] += addOrRemove;
     }
     //Assign targeted cells for upward sloping diagonal (i.e. those with coordinates (row+i, column-i)
     let targetedCellColumnAlt = column - i;
@@ -151,14 +174,14 @@ function placeBishop(row, column) {
       isValidCell(targetedCellRow, targetedCellColumnAlt) &&
       positionArray[targetedCellRow][targetedCellColumnAlt] != occupied
     ) {
-      positionArray[targetedCellRow][targetedCellColumnAlt] += 1;
+      positionArray[targetedCellRow][targetedCellColumnAlt] += addOrRemove;
     }
   }
 }
 
-function placeQueen(row, column) {
-  placeRook(row, column);
-  placeBishop(row, column);
+function placeQueen(row, column, addOrRemove = 1) {
+  placeRook(row, column, addOrRemove);
+  placeBishop(row, column, addOrRemove);
 }
 
 /**
@@ -186,19 +209,24 @@ function isValidCell(row, column) {
 function showPositions() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
+      cell.classList.add("guessed");
+      cell.classList.remove("selected");
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
+          cell.firstChild.nodeValue = pieceNumberToType(
+            checkPieceType(i, j, pieceInfoArray)
+          );
           break;
 
         case empty:
-          //console.log("nothing");
+          cell.classList.add("empty");
           break;
 
         default:
           cell.classList.add("targeted");
-          cell.innerHTML = positionArray[i][j];
+          cell.firstChild.nodeValue = positionArray[i][j];
           break;
       }
     }
@@ -212,10 +240,18 @@ function showPositions() {
 function selectCell(cell) {
   var rowIndex = cell.parentNode.rowIndex;
   var columnIndex = cell.cellIndex;
-  if (cell.classList.contains("selected")) {
-    cell.classList.remove("selected");
-  } else {
+  if (
+    !cell.classList.contains("selected") &&
+    !cell.classList.contains("guessed") &&
+    guessCounter < NUMGUESSPERTURN
+  ) {
+    guessCounter++;
     cell.classList.add("selected");
+  } else {
+    if (cell.classList.contains("selected")) {
+      guessCounter--;
+    }
+    cell.classList.remove("selected");
   }
 }
 
@@ -226,12 +262,17 @@ function selectCell(cell) {
 function guess() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
-      cell = document.getElementById("board").rows[i].cells[j];
+      let cell = document.getElementById("board").rows[i].cells[j];
       if (cell.classList.contains("selected")) {
         cell.classList.remove("selected");
+        cell.classList.add("guessed");
         switch (positionArray[i][j]) {
           case occupied:
+            removePiece(i, j, pieceInfoArray);
             cell.classList.add("occupied");
+            cell.firstChild.nodeValue = pieceNumberToType(
+              checkPieceType(i, j, pieceInfoArray)
+            );
             break;
 
           case empty:
@@ -240,16 +281,109 @@ function guess() {
 
           default:
             cell.classList.add("targeted");
-            cell.innerHTML = positionArray[i][j];
+            cell.firstChild.nodeValue = positionArray[i][j];
             break;
+        }
+      }
+    }
+  }
+  //Reset guessCounter
+  guessCounter = 0;
+  turnCounter++;
+  updateBoard();
+}
+/**
+ * Checks the type of piece that is on the cell located by parameters row and column
+ * @param {*} row
+ * @param {*} column
+ */
+function checkPieceType(row, column, pieceInfoArray) {
+  let pieceLocation = row * ROWNUM + column;
+  for (var i = 0; i < pieceInfoArray.length; i++) {
+    if (pieceInfoArray[i][1] == pieceLocation) {
+      return pieceInfoArray[i][0];
+    }
+  }
+  return 0;
+}
+
+function removePiece(row, column, pieceInfoArray) {
+  let type = checkPieceType(row, column, pieceInfoArray);
+  if (type == 0) {
+    console.log("No piece at this location");
+  }
+  removeFromPieceTable(type, pieceInfoArray);
+  switch (type) {
+    case 1:
+      placeKing(row, column, -1);
+      break;
+
+    case 2:
+      placeQueen(row, column, -1);
+      break;
+
+    case 3:
+      placeRook(row, column, -1);
+      break;
+
+    case 4:
+      placeBishop(row, column, -1);
+      break;
+  }
+}
+function removeFromPieceTable(pieceType, pieceInfoArray) {
+  for (var i = 0; i < pieceInfoArray.length; i++) {
+    let cell = document.getElementById("piecetable").rows[0].cells[i];
+    if (
+      pieceType == pieceInfoArray[i][0] &&
+      !cell.classList.contains("found")
+    ) {
+      cell.classList.add("found");
+      return;
+    }
+  }
+  alert("Found all the pieces");
+}
+
+function updateBoard() {
+  for (var i = 0; i < positionArray.length; i++) {
+    for (var j = 0; j < positionArray.length; j++) {
+      let cell = document.getElementById("board").rows[i].cells[j];
+      if (cell.classList.contains("targeted")) {
+        if (positionArray[i][j] == 0) {
+          cell.classList.remove("targeted");
+          cell.classList.add("empty");
+          cell.firstChild.nodeValue = ' ';
+        }
+        else {
+          cell.firstChild.nodeValue = positionArray[i][j];
         }
       }
     }
   }
 }
 
+function pieceNumberToType(number) {
+  switch (number) {
+    case 1:
+      return "K";
+
+    case 2:
+      return "Q";
+
+    case 3:
+      return "R";
+
+    case 4:
+      return "B";
+  }
+}
+
 function main() {
-  var pieceInfoArray = generateGameParameters(generateSeed());
+  positionArray = initialiseEmpty();
+  pieceInfoArray = generateGameParameters(generateSeed());
+  flagArray = initialiseEmpty();
+  initialisePieceTable();
 
   // //Test if array is working
   for (var k = 0; k < pieceInfoArray.length; k++) {
@@ -260,5 +394,4 @@ function main() {
   initialiseRightClickEvent();
 
   initialisePieces(pieceInfoArray);
-
 }
