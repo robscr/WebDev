@@ -13,9 +13,9 @@ Chessle-Ship is a game of strategy to successfully locate the pieces on the boar
    * To create new entry: **u = User(username='user1', email='johno@sample.com')**
    * To view entry identifier: **u**
    * To query: **users = User.query.all()**
-   *           **users**
+   *    **users**
    * To print database: **for user in users:**
-   *                    **print(user.id, user.username, user.email)**
+   *    **print(user.id, user.username, user.email)**
    * **db.session.add(u)**
    * **db.session.commit()**
 
