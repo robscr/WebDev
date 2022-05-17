@@ -11,15 +11,15 @@ const COLUMNNUM = 8;
 const NUMGUESSPERTURN = 8;
 const NUMTURNS = 6;
 
-const pieceSymbolArray = ['', 'K', 'Q', 'R', 'B'];
+const pieceSymbolArray = ["", "K", "Q", "R", "B"];
 
 var turnCounter = 0;
 var guessCounter = 0;
 
 //Initialise empty arrays
-var positionArray = new Array; //Contains information about whether cells are occupied/targeted/empty and the number of pieces targeting targeted cells
-var pieceInfoArray = new Array; //Contains information about the type of pieces on the board and their location
-var flagArray = new Array; //Contains information about the type of flag that is in each cell
+var positionArray = new Array(); //Contains information about whether cells are occupied/targeted/empty and the number of pieces targeting targeted cells
+var pieceInfoArray = new Array(); //Contains information about the type of pieces on the board and their location
+var flagArray = new Array(); //Contains information about the type of flag that is in each cell
 
 //Initialises a 2D array (array of arrays) that contains information about the status of each cell (empty, targeted or occupied)
 function initialiseEmpty() {
@@ -49,6 +49,7 @@ function initBoard(rownum, columnnum) {
       let cell = document.createElement("td");
       cell.classList.add("hidden");
       cell.setAttribute("onclick", "selectCell(this)");
+      cell.innerHTML = " ";
       row.appendChild(cell);
     }
   }
@@ -57,7 +58,7 @@ function initBoard(rownum, columnnum) {
 /**
  * Creates table elements each showing a piece that is on the grid
  */
- function initialisePieceTable() {
+function initialisePieceTable() {
   let table = document.getElementById("piecetable");
   let tablebody = document.createElement("tbody");
   table.appendChild(tablebody);
@@ -65,7 +66,8 @@ function initBoard(rownum, columnnum) {
   tablebody.appendChild(row);
   for (var i = 0; i < pieceInfoArray.length; i++) {
     let cell = document.createElement("td");
-    cell.innerHTML = pieceNumberToType(pieceInfoArray[i][0]);
+    cell.innerHTML = " ";
+    cell.firstChild.nodeValue = pieceNumberToType(pieceInfoArray[i][0]);
     row.appendChild(cell);
   }
 }
@@ -86,20 +88,8 @@ function initialiseRightClickEvent() {
 
         flag(row, column, event);
         //Assigns a flag to a cell if it does not already have a flag, otherwise removes the flag
-        
       });
     }
-  }
-}
-function flag(row, column, event) {
-  flagArray[row][column]++;
-  let currentFlag = (flagArray[row][column])%pieceSymbolArray.length;
-  event.target.innerHTML = pieceSymbolArray[currentFlag];
-  if (currentFlag != 0) {
-    event.target.classList.add("flagged");
-  }
-  else {
-    event.target.classList.remove("flagged");
   }
 }
 
@@ -125,7 +115,6 @@ function initialisePieces(pieceArray) {
       case 4:
         placeBishop(pieceRow, pieceColumn);
         break;
-        
     }
   }
 }
@@ -225,7 +214,9 @@ function showPositions() {
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
-          cell.innerHTML = pieceNumberToType(checkPieceType(i,j,pieceInfoArray));
+          cell.firstChild.nodeValue = pieceNumberToType(
+            checkPieceType(i, j, pieceInfoArray)
+          );
           break;
 
         case empty:
@@ -234,7 +225,7 @@ function showPositions() {
 
         default:
           cell.classList.add("targeted");
-          cell.innerHTML = positionArray[i][j];
+          cell.firstChild.nodeValue = positionArray[i][j];
           break;
       }
     }
@@ -248,7 +239,11 @@ function showPositions() {
 function selectCell(cell) {
   var rowIndex = cell.parentNode.rowIndex;
   var columnIndex = cell.cellIndex;
-  if (!cell.classList.contains("selected") && !cell.classList.contains("guessed") && guessCounter<NUMGUESSPERTURN) {
+  if (
+    !cell.classList.contains("selected") &&
+    !cell.classList.contains("guessed") &&
+    guessCounter < NUMGUESSPERTURN
+  ) {
     guessCounter++;
     cell.classList.add("selected");
   } else {
@@ -274,7 +269,9 @@ function guess() {
           case occupied:
             removePiece(i, j, pieceInfoArray);
             cell.classList.add("occupied");
-            cell.innerHTML = pieceNumberToType(checkPieceType(i,j,pieceInfoArray));
+            cell.firstChild.nodeValue = pieceNumberToType(
+              checkPieceType(i, j, pieceInfoArray)
+            );
             break;
 
           case empty:
@@ -283,7 +280,7 @@ function guess() {
 
           default:
             cell.classList.add("targeted");
-            cell.innerHTML = positionArray[i][j];
+            cell.firstChild.nodeValue = positionArray[i][j];
             break;
         }
       }
@@ -296,11 +293,11 @@ function guess() {
 }
 /**
  * Checks the type of piece that is on the cell located by parameters row and column
- * @param {*} row 
- * @param {*} column 
+ * @param {*} row
+ * @param {*} column
  */
 function checkPieceType(row, column, pieceInfoArray) {
-  let pieceLocation = row*ROWNUM+column;
+  let pieceLocation = row * ROWNUM + column;
   for (var i = 0; i < pieceInfoArray.length; i++) {
     if (pieceInfoArray[i][1] == pieceLocation) {
       return pieceInfoArray[i][0];
@@ -331,13 +328,15 @@ function removePiece(row, column, pieceInfoArray) {
     case 4:
       placeBishop(row, column, -1);
       break;
-      
   }
 }
 function removeFromPieceTable(pieceType, pieceInfoArray) {
   for (var i = 0; i < pieceInfoArray.length; i++) {
     let cell = document.getElementById("piecetable").rows[0].cells[i];
-    if (pieceType == pieceInfoArray[i][0] && !cell.classList.contains("found")) {
+    if (
+      pieceType == pieceInfoArray[i][0] &&
+      !cell.classList.contains("found")
+    ) {
       cell.classList.add("found");
       return;
     }
@@ -350,7 +349,7 @@ function updateBoard() {
     for (var j = 0; j < positionArray.length; j++) {
       let cell = document.getElementById("board").rows[i].cells[j];
       if (cell.classList.contains("targeted")) {
-        cell.innerHTML = positionArray[i][j];
+        cell.firstChild.nodeValue = positionArray[i][j];
       }
     }
   }
@@ -359,16 +358,16 @@ function updateBoard() {
 function pieceNumberToType(number) {
   switch (number) {
     case 1:
-      return 'K'
+      return "K";
 
     case 2:
-      return 'Q'
+      return "Q";
 
     case 3:
-      return 'R'
+      return "R";
 
     case 4:
-      return 'B'
+      return "B";
   }
 }
 
@@ -387,5 +386,4 @@ function main() {
   initialiseRightClickEvent();
 
   initialisePieces(pieceInfoArray);
-
 }
