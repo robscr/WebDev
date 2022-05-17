@@ -1,7 +1,23 @@
 # Chessle-Ship
 Chessle-Ship is a game of strategy to successfully locate the pieces on the board. It combines the ship-sinking strategy of battleship with the game environment of chess.
 
+## Interacting with the database
+1. Initialising database:
+   > **flask db init**
+   > **flask db migrate [-m "some_message"]**
+   > **flask db upgrade**
 
+2. Enter python shell:
+   > **from app import db**
+   > **from app.models import User**
+   > To create new entry: **u = User(username='user1', email='johno@sample.com')**
+   > To view entry identifier: **u**
+   > To query: **users = User.query.all()**
+   >           **users**
+   > To print database: **for user in users:**
+   >                    **  print(user.id, user.username, user.email)**
+   > **db.session.add(u)**
+   > **db.session.commit()**
 
 
 ## Guidance for using Git from VSCode
