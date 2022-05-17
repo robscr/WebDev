@@ -349,7 +349,14 @@ function updateBoard() {
     for (var j = 0; j < positionArray.length; j++) {
       let cell = document.getElementById("board").rows[i].cells[j];
       if (cell.classList.contains("targeted")) {
-        cell.firstChild.nodeValue = positionArray[i][j];
+        if (positionArray[i][j] == 0) {
+          cell.classList.remove("targeted");
+          cell.classList.add("empty");
+          cell.firstChild.nodeValue = ' ';
+        }
+        else {
+          cell.firstChild.nodeValue = positionArray[i][j];
+        }
       }
     }
   }
