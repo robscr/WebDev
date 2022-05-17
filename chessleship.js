@@ -12,7 +12,7 @@ const NUMGUESSPERTURN = 8;
 const NUMTURNS = 6;
 
 const pieceSymbolArray = ["", "K", "Q", "R", "B"];
-
+//For rob to Change to 
 var turnCounter = 0;
 var guessCounter = 0;
 
@@ -48,6 +48,7 @@ function initBoard(rownum, columnnum) {
     for (var j = 0; j < columnnum; j++) {
       let cell = document.createElement("td");
       cell.classList.add("hidden");
+      // cell.classList.add("ratio ratio-1x1")
       cell.setAttribute("onclick", "selectCell(this)");
       cell.innerHTML = " ";
       row.appendChild(cell);
