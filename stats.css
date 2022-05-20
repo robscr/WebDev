@@ -1,0 +1,20 @@
+body{
+    color: rgb(27, 18, 18);
+    text-align: center;
+    font-family: Sans-serif;
+    text-transform:uppercase;
+}
+
+.sub{
+    font-size:x-large;
+    text-align: center;
+    margin:auto;
+}
+.stat-container{
+    align-items: center;
+}
+.stat-container .stat , .label {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
