@@ -1,40 +1,89 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.nav-item{
+  background-color: #333;
+}
+/* li {
+  margin: auto;
+} */
+.navbar-nav{
+  margin-left: auto;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+.active {
+  background-color: #04AA6D;
+}
 td {
-    background-color: rgb(158, 201, 158);
+    /* background-color: rgb(0, 0, 0); */
     text-transform:uppercase;
-    min-height: 100%;
-    width: 100px;
-    height: 100px;
     font-size: xxx-large;
     color: white;
     text-align: center;
     font-family: Sans-serif;
+    width: 12.5%;
+    height: 12.5%;
   }
-  
+
+  tr:nth-child(even) td:nth-child(even), tr:nth-child(odd) td:nth-child(odd) {
+    background: rgb(85, 108, 83);
+  }
+  tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.582);
+  }
+
+  td:hover{
+    background: rgba(129, 140, 114, 0.759) !important;
+  }
+
   table {
     table-layout: auto;
     background-color: rgb(0, 0, 0);
     border-style: double border;
     margin-left: auto;
     margin-right: auto;
+    width: 80vmin;
+    height:80vmin;
   }
+ 
   .occupied {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(255, 0, 0)!important;
   }
   
   .targeted {
-    background-color: rgb(228, 228, 24);
+    background-color: rgb(228, 228, 24)!important;
   }
   
   .selected {
+    background-color: rgb(216, 216, 216)!important;
     filter: grayscale(80%);
   }
   
   .empty {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0)!important;
   }
 
   .flagged {
-    background-color: rgb(255, 0, 179);
+    /* background-color: rgb(255, 0, 179); */
+  }
+
+  .found {
+    filter: grayscale(80%);
   }
 
   h1,h2 {
