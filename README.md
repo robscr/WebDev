@@ -5,6 +5,10 @@ Chessle-Ship is a game of strategy to successfully locate the pieces on the boar
     $ python3 -m venv .venv
     $ source .venv/bin/activate
     $ pip install -r requirements.txt
+    
+## Running App in venv
+    $ export FLASK_APP=app.py
+    $ flask run
 
 ## Interacting with the database
 1. Initialising database:
