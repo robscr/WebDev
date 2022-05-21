@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>ChessleShip Login</title>
+
+
+    </head>
+
+    <body>
+
+        <div>
+            <form method="post">
+                <div>
+                    {{ form.username.label }}
+                    {{ form.username(size=20) }}
+                </div>
+
+                <div>
+                    {{ form.password.label }}
+                    {{ form.password(size=20) }}
+                    
+                </div>
+
+                <div>
+                    {{ form.submit() }}
+                </div>
+
+
+            </form>
+        </div>
+
+        
+
+
+
+    </body>
+
+
+</html>
