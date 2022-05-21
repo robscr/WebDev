@@ -1,4 +1,4 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, flash, redirect
 from app import app
 
 
@@ -47,6 +47,31 @@ def settings():
 def stats():
     return render_template('stats.html')
 
-@app.route('/login')
+#@app.route('/login')
+#def login():
+    #return render_template('login.html')
+
+#Sample from Tom's tutorial
+from app.forms import LoginForm
+from app import db
+from app.models import User
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    
+    form = LoginForm()
+    
+    if form.validate_on_submit():
+        user = User(username=form.username.data, password_hash=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    #if form.validate_on_submit():
+    #    user = User()
+    #    
+    #    #flash('login requested for user {}, remember_me={}'.format(
+    #    #    form.username.data, form.remember_me.data))
+    #    return redirect(url_for('index'))
+    
+    return render_template('login.html', title='sign in', form=form)
