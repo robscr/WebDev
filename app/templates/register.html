@@ -12,20 +12,20 @@
         <div>
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
-                <p>
+                <p style="font-family: 'Arial'">
                     {{ form.username.label }}<br>
                     {{ form.username(size=32) }}<br>
 
                 </p>
-                <p>
+                <p style="font-family: 'Arial'">
                     {{ form.password.label }}<br>
                     {{ form.password(size=32) }}<br>
                     {% for error in form.password.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </p>
-                <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-                <p>{{ form.submit() }}</p>
+                <p style="font-family: 'Arial'">{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p style="font-family: 'Arial'">{{ form.submit() }}</p>
             </form>
 
         </div>

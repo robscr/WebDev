@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, session
 from app import app
 
 
@@ -30,6 +30,8 @@ from app import app
 @app.route('/index')
 @app.route('/chessleship.html')
 def index():
+    #if session.get('logged_in'):
+    #    return render_template('chessleship.html')
     return render_template('chessleship.html')
 
 @app.route('/rules')
@@ -56,8 +58,8 @@ from app.forms import LoginForm
 from app import db
 from app.models import User
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     
     form = LoginForm()
     
@@ -74,4 +76,4 @@ def login():
     #    #    form.username.data, form.remember_me.data))
     #    return redirect(url_for('index'))
     
-    return render_template('login.html', title='sign in', form=form)
+    return render_template('register.html', title='sign in', form=form)
