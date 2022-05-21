@@ -373,7 +373,19 @@ function updateBoard() {
 }
 
 function pieceNumberToType(number) {
-  return pieceSymbolArray[number];
+  switch (number) {
+    case 1:
+      return "K";
+
+    case 2:
+      return "Q";
+
+    case 3:
+      return "R";
+
+    case 4:
+      return "B";
+  }
 }
 
 function main() {

@@ -46,3 +46,7 @@ def settings():
 @app.route('/stats.html')
 def stats():
     return render_template('stats.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
