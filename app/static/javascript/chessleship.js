@@ -94,7 +94,7 @@ function initialiseRightClickEvent() {
         let targeted = event.target
         if(!cell.classList.contains("targeted")&&!cell.classList.contains("occupied")&&!cell.classList.contains("empty")){
         flag(row, column, targeted);
-        }s
+        }
         //Assigns a flag to a cell if it does not already have a flag, otherwise removes the flag
       });
     }
