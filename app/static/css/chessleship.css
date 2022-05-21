@@ -178,3 +178,10 @@ td {
     padding: 1vmin;
   }
 
+  .turncontainer{
+    float: right;
+  }
+  .guesscontainer{
+    float: left;
+  }
+

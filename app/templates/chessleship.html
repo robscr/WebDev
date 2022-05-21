@@ -53,17 +53,24 @@
           </table>
         </div>
         <div class="col-12 col-sm-12 col-md-3" id="functions-container">
-          <div class="piece-container">
+          <div class="piece-container col-12 col-sm-12 col-md-3">
             <h3 id="h_pieces">Pieces: </h3>
             <table id="piecetable">
             </table>
-            <div class="guess-container">
-              <div id="guesscount" class="guess">0</div>
-              <div class="label">Guesses</div>
-            </div>
+            <div class="container col-12 col-sm-12 col-md-3">
+              <div class="guess-container">
+                <div id="guesscount" class="guess">0</div>
+                <div id= "guess label" class="label">Guesses</div>
+              </div>
+              <div class="turn-container">   
+                <div id="turncount" class="turn">0</div>
+                <div id= "turn label" class="label">Turns Remaining</div>
+              </div>
+            </div> 
+            
           </div>
           
-          <div class="btns-conatiner">
+          <div class="btns-conatiner col-12 col-sm-12 col-md-3">
             <button type="button" class="button" onclick="guess()">Guess</button>
             <button type="button" class="button" onclick="showPositions()">Show Positions</button>
             <button type="button" class="button" onclick="resetflags()">Clear Flags</button>
