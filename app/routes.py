@@ -1,5 +1,6 @@
 from flask import render_template, url_for, flash, redirect, session
 from app import app
+import os
 
 
 # @app.route('/')
@@ -31,7 +32,7 @@ from app import app
 @app.route('/chessleship.html')
 def index():
     #if session.get('logged_in'):
-    #    return render_template('chessleship.html')
+        #return render_template('chessleship.html')
     return render_template('chessleship.html')
 
 @app.route('/rules')
@@ -77,3 +78,16 @@ def register():
     #    return redirect(url_for('index'))
     
     return render_template('register.html', title='sign in', form=form)
+
+from flask_login import LoginManager
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+
+        login_user(user)
+        return redirect(url_for('index'))
+
+    return render_template('login.html', form=form)
