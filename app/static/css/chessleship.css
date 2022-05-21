@@ -147,16 +147,16 @@ td {
     background-color: rgb(184, 155, 77) !important;
     /* padding:1vmin; */
     /* margin-right: auto;  */
-    float: left;
+    /* float: left; */
   }
   
   #piecetable td{
     border:2px solid black;
     border-style: double border;
-    width: 8vmin;
+    /* width: 8vmin;
     height:8vmin;
     padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    padding-right: 0.5vw; */
   }
   
   #h_pieces{
@@ -168,7 +168,7 @@ td {
     padding-left:1vmin; */
     padding-top: 10vmin; 
     padding-bottom: 5vmin;
-    float:right;
+    /* float:right; */
   }
   .button{
     border: 2px solid black;
@@ -178,12 +178,12 @@ td {
     padding: 1vmin;
   }
 
-  .turncontainer{
+  /* .turncontainer{
     float: right;
   }
   .guesscontainer{
     float: left;
-  }
+  } */
   .flag{
     pointer-events: none;
   }
