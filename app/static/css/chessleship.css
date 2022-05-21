@@ -177,4 +177,7 @@ td {
     color: white;
     padding: 1vmin;
   }
+  .flag{
+    pointer-events: none;
+  }
 
