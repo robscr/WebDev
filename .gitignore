@@ -3,3 +3,5 @@
 .venv
 
 venvls
+
+*/__pycache__/*
