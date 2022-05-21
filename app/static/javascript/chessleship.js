@@ -419,10 +419,6 @@ function main() {
   flagArray = initialiseEmpty();
   initialisePieceTable();
 
-  // //Test if array is working
-  for (var k = 0; k < pieceInfoArray.length; k++) {
-    console.log(pieceInfoArray[k]);
-  }
   initBoard(ROWNUM, COLUMNNUM);
   //Initialises right click functionality
   initialiseRightClickEvent();
