@@ -28,6 +28,11 @@ body{
     font-size: small;
     width: 30vmin !important;
     height:30vmin !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+.example-container{
+    justify-content: center;
 }
 
 td{
