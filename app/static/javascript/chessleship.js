@@ -73,11 +73,7 @@ function initialisePieceTable() {
   for (var i = 0; i < pieceInfoArray.length; i++) {
     let cell = document.createElement("td");
     cell.innerHTML = " ";
-    let piece_image = document.createElement("img");
-    piece_image.src = pieceNumberToImage(pieceInfoArray[i][0]);
-    piece_image.width = "60"
-    piece_image.height = "60"
-    cell.appendChild(piece_image);
+    addPieceToCell(cell,pieceNumberToImage(pieceInfoArray[i][0]))
     row.appendChild(cell);
   }
 }
@@ -224,9 +220,10 @@ function showPositions() {
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
-          cell.firstChild.nodeValue = pieceNumberToImage(
+          let image = pieceNumberToImage(
             checkPieceType(i, j, pieceInfoArray)
           );
+          addPieceByIndex(i,j,image);
           break;
 
         case empty:
@@ -283,10 +280,10 @@ function guess() {
           case occupied:
             removePiece(i, j, pieceInfoArray);
             cell.classList.add("occupied");
-            image = pieceNumberToImage(
+            let image = pieceNumberToImage(
               checkPieceType(i, j, pieceInfoArray)
             );
-            addPiece(i,j,image)
+            addPieceByIndex(i,j,image)
             break;
 
           case empty:
@@ -307,7 +304,15 @@ function guess() {
   updateBoard();
 }
 
-function addPiece(row, column, src) {
+function addPieceToCell(cell, src) {
+  let piece_image = document.createElement("img");
+  piece_image.src = src;
+  piece_image.width = "60"
+  piece_image.height = "60"
+  cell.appendChild(piece_image);
+}
+
+function addPieceByIndex(row, column, src) {
   let piece_image = document.createElement("img");
   piece_image.src = src;
   piece_image.width = "60"
@@ -315,6 +320,7 @@ function addPiece(row, column, src) {
   let cell = document.getElementById("board").rows[row].cells[column];
   cell.appendChild(piece_image);
 }
+
 
 /**
  * Checks the type of piece that is on the cell located by parameters row and column
