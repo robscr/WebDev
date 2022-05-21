@@ -9,12 +9,17 @@ const COLUMNNUM = 8;
 
 //Sets the number of guesses allowed per turn as well as number of turns
 const NUMGUESSPERTURN = 8;
-const NUMTURNS = 6;
+const NUMTURNS = 8;
 
 const pieceSymbolArray = ["", "K", "Q", "R", "B"];
 //For rob to Change to 
 var turnCounter = 0;
+
+//GuessCounter counts the number of guesses per turn to ensure limit on number of guesses
 var guessCounter = 0;
+//GuessCount counts total number of guesses in game 
+var guessCount = 0;
+
 
 //Initialise empty arrays
 var positionArray = new Array(); //Contains information about whether cells are occupied/targeted/empty and the number of pieces targeting targeted cells
@@ -246,10 +251,14 @@ function selectCell(cell) {
     guessCounter < NUMGUESSPERTURN
   ) {
     guessCounter++;
+    guessCount++;
+    document.getElementById("guesscount").firstChild.nodeValue = guessCount
     cell.classList.add("selected");
   } else {
     if (cell.classList.contains("selected")) {
       guessCounter--;
+      guessCount--;
+      document.getElementById("guesscount").firstChild.nodeValue = guessCount
     }
     cell.classList.remove("selected");
   }
