@@ -2,9 +2,13 @@
 Chessle-Ship is a game of strategy to successfully locate the pieces on the board. It combines the ship-sinking strategy of battleship with the game environment of chess.
 
 ## Installing and Setting Up Virtual Environment on Linux
-    $ python3 -m venv venv
-    $ source venv/bin/activate
+    $ python3 -m venv .venv
+    $ source .venv/bin/activate
     $ pip install -r requirements.txt
+    
+## Running App in venv
+    $ export FLASK_APP=app.py
+    $ flask run
 
 ## Interacting with the database
 1. Initialising database:
