@@ -413,7 +413,9 @@ function pieceNumberToImage(number) {
   }
 }
 
+
 function main() {
+  
   positionArray = initialiseEmpty();
   pieceInfoArray = generateGameParameters(generateSeed());
   flagArray = initialiseEmpty();
@@ -424,4 +426,6 @@ function main() {
   initialiseRightClickEvent();
 
   initialisePieces(pieceInfoArray);
+  
 }
+
