@@ -5,10 +5,10 @@
     <title>Chessleship</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="chessleship.css" />
-    <script src="chessleship.js"></script>
-    <script src="aleaPRNG-1.1.js"></script>
-    <script src="seed-positions.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chessleship.css') }}" />
+    <script src="{{ url_for('static', filename='chessleship.js') }}"></script>
+    <script src="{{ url_for('static', filename='aleaPRNG-1.1.js') }}"></script>
+    <script src="{{ url_for('static', filename='seed-positions.js') }}"></script>
     </script>
   </head>
   <body onload="main()">
