@@ -73,7 +73,7 @@ function initialisePieceTable() {
   for (var i = 0; i < pieceInfoArray.length; i++) {
     let cell = document.createElement("td");
     cell.innerHTML = " ";
-    cell.firstChild.nodeValue = pieceNumberToType(pieceInfoArray[i][0]);
+    addPieceToCell(cell,pieceNumberToImage(pieceInfoArray[i][0]))
     row.appendChild(cell);
   }
 }
@@ -220,9 +220,10 @@ function showPositions() {
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
-          cell.firstChild.nodeValue = pieceNumberToType(
+          let image = pieceNumberToImage(
             checkPieceType(i, j, pieceInfoArray)
           );
+          addPieceByIndex(i,j,image);
           break;
 
         case empty:
@@ -279,9 +280,10 @@ function guess() {
           case occupied:
             removePiece(i, j, pieceInfoArray);
             cell.classList.add("occupied");
-            cell.firstChild.nodeValue = pieceNumberToType(
+            let image = pieceNumberToImage(
               checkPieceType(i, j, pieceInfoArray)
             );
+            addPieceByIndex(i,j,image)
             break;
 
           case empty:
@@ -301,6 +303,25 @@ function guess() {
   turnCounter++;
   updateBoard();
 }
+
+function addPieceToCell(cell, src) {
+  let piece_image = document.createElement("img");
+  piece_image.src = src;
+  piece_image.width = "60"
+  piece_image.height = "60"
+  cell.appendChild(piece_image);
+}
+
+function addPieceByIndex(row, column, src) {
+  let piece_image = document.createElement("img");
+  piece_image.src = src;
+  piece_image.width = "60"
+  piece_image.height = "60"
+  let cell = document.getElementById("board").rows[row].cells[column];
+  cell.appendChild(piece_image);
+}
+
+
 /**
  * Checks the type of piece that is on the cell located by parameters row and column
  * @param {*} row
@@ -372,19 +393,19 @@ function updateBoard() {
   }
 }
 
-function pieceNumberToType(number) {
+function pieceNumberToImage(number) {
   switch (number) {
     case 1:
-      return "K";
+      return "static/images/king.svg";
 
     case 2:
-      return "Q";
+      return "static/images/queen.svg";
 
     case 3:
-      return "R";
+      return "static/images/rook.svg";
 
     case 4:
-      return "B";
+      return "static/images/bishop.svg";
   }
 }
 

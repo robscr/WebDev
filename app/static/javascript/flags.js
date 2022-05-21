@@ -2,31 +2,40 @@ function flag(row, column, event) {
     //increment flag by 1
     flagArray[row][column] = (flagArray[row][column]+1) % pieceSymbolArray.length;
     let currentFlag = flagArray[row][column];
-    event.target.firstChild.nodeValue = pieceSymbolArray[currentFlag];
+    
+  
     switch (currentFlag) {
         case 1:
             event.target.classList.add("flagged");
             flagKing(row, column, 1);
+            addFlagImage(event.target,pieceNumberToImage(currentFlag));
           break;
     
         case 2:
             flagKing(row, column, -1);
             flagQueen(row, column, 1);
+            removeFlagImage(event.target);
+            addFlagImage(event.target,pieceNumberToImage(currentFlag));
           break;
     
         case 3:
             flagQueen(row, column, -1);
             flagRook(row, column, 1);
+            removeFlagImage(event.target);
+            addFlagImage(event.target,pieceNumberToImage(currentFlag));
         break;
     
         case 4:
             flagRook(row, column, -1);
             flagBishop(row, column, 1);
+            removeFlagImage(event.target);
+            addFlagImage(event.target,pieceNumberToImage(currentFlag));
           break;
 
         case 0:
             event.target.classList.remove("flagged");
             flagBishop(row, column, -1);
+            removeFlagImage(event.target);
         break;
       }
   }
@@ -174,3 +183,16 @@ function flag(row, column, event) {
     cell.removeChild(DOM_img);
   }
   
+  function addFlagImage(cell, src) {
+    let piece_image = document.createElement("img");
+    piece_image.src = src;
+    piece_image.id = "flag"
+    piece_image.width = "60"
+    piece_image.height = "60"
+    cell.appendChild(piece_image);
+  }
+
+  function removeFlagImage(cell) {
+    let DOM_img = cell.querySelector('#flag');
+    cell.removeChild(DOM_img);
+  }
