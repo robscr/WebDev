@@ -1,4 +1,15 @@
-function flag(row, column, event) {
+function resetflags() {
+  for (var i = 0; i < positionArray.length; i++) {
+    for (var j = 0; j < positionArray.length; j++) {
+      while(flagArray[i][j]!=0){
+        let target = document.getElementById("board").rows[i].cells[j];
+        flag(i,j,target);
+      }
+    }
+  }
+}
+
+function flag(row, column, targeted) {
     //increment flag by 1
     flagArray[row][column] = (flagArray[row][column]+1) % pieceSymbolArray.length;
     let currentFlag = flagArray[row][column];
@@ -6,36 +17,36 @@ function flag(row, column, event) {
   
     switch (currentFlag) {
         case 1:
-            event.target.classList.add("flagged");
+          targeted.classList.add("flagged");
             flagKing(row, column, 1);
-            addFlagImage(event.target,pieceNumberToImage(currentFlag));
+            addFlagImage(targeted,pieceNumberToImage(currentFlag));
           break;
     
         case 2:
             flagKing(row, column, -1);
             flagQueen(row, column, 1);
-            removeFlagImage(event.target);
-            addFlagImage(event.target,pieceNumberToImage(currentFlag));
+            removeFlagImage(targeted);
+            addFlagImage(targeted,pieceNumberToImage(currentFlag));
           break;
     
         case 3:
             flagQueen(row, column, -1);
             flagRook(row, column, 1);
-            removeFlagImage(event.target);
-            addFlagImage(event.target,pieceNumberToImage(currentFlag));
+            removeFlagImage(targeted);
+            addFlagImage(targeted,pieceNumberToImage(currentFlag));
         break;
     
         case 4:
             flagRook(row, column, -1);
             flagBishop(row, column, 1);
-            removeFlagImage(event.target);
-            addFlagImage(event.target,pieceNumberToImage(currentFlag));
+            removeFlagImage(targeted);
+            addFlagImage(targeted,pieceNumberToImage(currentFlag));
           break;
 
         case 0:
-            event.target.classList.remove("flagged");
+          targeted.classList.remove("flagged");
             flagBishop(row, column, -1);
-            removeFlagImage(event.target);
+            removeFlagImage(targeted);
         break;
       }
   }
