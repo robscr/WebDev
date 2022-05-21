@@ -34,3 +34,7 @@ def index():
 @app.route('/rules')
 def rules():
     return render_template('rules.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
