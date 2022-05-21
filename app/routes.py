@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, session
+from flask import render_template, url_for, flash, redirect, session, abort, request
 from app import app
 import os
 
@@ -81,13 +81,36 @@ def register():
 
 from flask_login import LoginManager
 
+# @app.route('/login', methods=['GET', 'POST'])
+# @app.login_required
+# def login():
+#     form = LoginForm()
+
+#     if form.validate_on_submit():
+
+#         login_user(user)
+#         return redirect(url_for('index'))
+
+#     return render_template('login.html', form=form)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # Here we use a class of some kind to represent and validate our
+    # client-side form data. For example, WTForms is a library that will
+    # handle this for us, and we use a custom LoginForm to validate.
     form = LoginForm()
-
     if form.validate_on_submit():
+        # Login and validate the user.
+        # user should be an instance of your `User` class
+        LoginManager.login_user(user)
 
-        login_user(user)
-        return redirect(url_for('index'))
+        flash('Logged in successfully.')
 
+        next = request.args.get('next')
+        # is_safe_url should check if the url is safe for redirects.
+        # See http://flask.pocoo.org/snippets/62/ for an example.
+        if not is_safe_url(next):
+            return abort(400)
+
+        return redirect(next or flask.url_for('index'))
     return render_template('login.html', form=form)
