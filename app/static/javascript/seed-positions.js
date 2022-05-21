@@ -1,17 +1,18 @@
-//Enumerate values for piece types
-const king = 1;
-const queen = 2;
-const rook = 3;
-const bishop = 4;
-const knight = 5; //optional implementation
+//Enumerated values for piece types
+// king = 1;
+// queen = 2;
+// rook = 3;
+// bishop = 4;
+// knight = 5; //optional implementation
 
+//Seed 3434398 is a real spicy one
 function generateSeed() {
   const date = new Date();
   const dateseedstring =
   "" + date.getDate() + (date.getMonth() + 1) + date.getFullYear();
   dateseed = parseInt(dateseedstring);
   console.log("The dateseed is: " + dateseed);
-  return dateseed+123;
+  return dateseed+1282376;
 }
 
 function generateGameParameters(seed) {
