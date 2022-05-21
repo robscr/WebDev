@@ -28,5 +28,21 @@ from app import app
 
 @app.route('/')
 @app.route('/index')
+@app.route('/chessleship.html')
 def index():
     return render_template('chessleship.html')
+
+@app.route('/rules')
+@app.route('/rules.html')
+def rules():
+    return render_template('rules.html')
+
+@app.route('/settings')
+@app.route('/settings.html')
+def settings():
+    return render_template('settings.html')
+
+@app.route('/stats')
+@app.route('/stats.html')
+def stats():
+    return render_template('stats.html')
