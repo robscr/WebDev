@@ -30,3 +30,15 @@ from app import app
 @app.route('/index')
 def index():
     return render_template('chessleship.html')
+
+@app.route('/rules')
+def rules():
+    return render_template('rules.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+@app.route('/stats')
+def stats():
+    return render_template('stats.html')
