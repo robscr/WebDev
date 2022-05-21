@@ -43,7 +43,7 @@ function flag(row, column, event) {
         ) {
             //If adding annotations:
           if (addOrRemove == 1) {
-            addAnnotation(targetedCellRow, targetedCellColumn, "king", "king.svg");
+            addAnnotation(targetedCellRow, targetedCellColumn, "king", "static/images/king.svg");
           }
           else {
             removeAnnotation(targetedCellRow, targetedCellColumn, "king");
@@ -58,7 +58,7 @@ function flag(row, column, event) {
       //Assigns all cells either on the same row or same column of the occupied as targeted, except for the occupied cell itself
       if (i != column) {
         if (addOrRemove == 1) {
-            addAnnotation(row, i, "rook", "rook.svg");
+            addAnnotation(row, i, "rook", "static/images/rook.svg");
           }
           else {
             removeAnnotation(row, i, "rook");
@@ -66,7 +66,7 @@ function flag(row, column, event) {
       }
       if (i != row) {
         if (addOrRemove == 1) {
-            addAnnotation(i, column, "rook", "rook.svg");
+            addAnnotation(i, column, "rook", "static/images/rook.svg");
           }
           else {
             removeAnnotation(i, column, "rook");
@@ -84,7 +84,7 @@ function flag(row, column, event) {
         !(targetedCellRow == row && targetedCellColumn == column)
       ) {
         if (addOrRemove == 1) {
-            addAnnotation(targetedCellRow, targetedCellColumn, "bishop", "bishop.svg");
+            addAnnotation(targetedCellRow, targetedCellColumn, "bishop", "static/images/bishop.svg");
           }
           else {
             removeAnnotation(targetedCellRow, targetedCellColumn, "bishop");
@@ -97,7 +97,7 @@ function flag(row, column, event) {
         !(targetedCellRow == row && targetedCellColumnAlt == column)
       ) {
         if (addOrRemove == 1) {
-            addAnnotation(targetedCellRow, targetedCellColumnAlt, "bishop", "bishop.svg");
+            addAnnotation(targetedCellRow, targetedCellColumnAlt, "bishop", "static/images/bishop.svg");
           }
           else {
             removeAnnotation(targetedCellRow, targetedCellColumnAlt, "bishop");
@@ -111,7 +111,7 @@ function flag(row, column, event) {
         //Assigns all cells either on the same row or same column of the occupied as targeted, except for the occupied cell itself
         if (i != column) {
           if (addOrRemove == 1) {
-              addAnnotation(row, i, "queen", "queen.svg");
+              addAnnotation(row, i, "queen", "static/images/queen.svg");
             }
             else {
               removeAnnotation(row, i, "queen");
@@ -119,7 +119,7 @@ function flag(row, column, event) {
         }
         if (i != row) {
           if (addOrRemove == 1) {
-              addAnnotation(i, column, "queen", "queen.svg");
+              addAnnotation(i, column, "queen", "static/images/queen.svg");
             }
             else {
               removeAnnotation(i, column, "queen");
@@ -135,7 +135,7 @@ function flag(row, column, event) {
           !(targetedCellRow == row && targetedCellColumn == column)
         ) {
           if (addOrRemove == 1) {
-              addAnnotation(targetedCellRow, targetedCellColumn,  "queen", "queen.svg");
+              addAnnotation(targetedCellRow, targetedCellColumn,  "queen", "static/images/queen.svg");
             }
             else {
               removeAnnotation(targetedCellRow, targetedCellColumn,  "queen");
@@ -148,7 +148,7 @@ function flag(row, column, event) {
           !(targetedCellRow == row && targetedCellColumnAlt == column)
         ) {
           if (addOrRemove == 1) {
-              addAnnotation(targetedCellRow, targetedCellColumnAlt,  "queen", "queen.svg");
+              addAnnotation(targetedCellRow, targetedCellColumnAlt,  "queen", "static/images/queen.svg");
             }
             else {
               removeAnnotation(targetedCellRow, targetedCellColumnAlt,  "queen");
