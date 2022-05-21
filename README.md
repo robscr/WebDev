@@ -43,12 +43,12 @@ The following commands at each step can be run in the terminal on VSCode. For it
    Use: **git add --all**
 
 
-5. Commit these changes (to your local copy of the repository)
+5. Commit these changes (to your local copy of the repository).
 
    Use: **git commit -m "commit_message_here"**
 
 
-6. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub
+6. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub.
 
    Use: **git push**
 

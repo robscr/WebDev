@@ -196,6 +196,7 @@ function flag(row, column, targeted) {
   
   function addFlagImage(cell, src) {
     let piece_image = document.createElement("img");
+    
     piece_image.src = src;
     piece_image.id = "flag"
     piece_image.width = "60"
