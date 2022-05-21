@@ -38,3 +38,7 @@ def rules():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+@app.route('/stats')
+def stats():
+    return render_template('stats.html')
