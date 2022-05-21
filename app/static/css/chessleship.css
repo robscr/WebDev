@@ -110,7 +110,7 @@ td {
   }
 
   .flagged {
-    /* background-color: rgb(255, 0, 179); */
+    padding:none !important;
   }
 
   .found {
@@ -186,4 +186,6 @@ td {
   } */
   .flag{
     pointer-events: none;
+    max-width: 25%;
+    height: 25%;
   }
