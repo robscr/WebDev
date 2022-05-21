@@ -184,4 +184,6 @@ td {
   .guesscontainer{
     float: left;
   }
-
+  .flag{
+    pointer-events: none;
+  }
