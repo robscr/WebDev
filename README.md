@@ -1,6 +1,11 @@
 # Chessle-Ship
 Chessle-Ship is a game of strategy to successfully locate the pieces on the board. It combines the ship-sinking strategy of battleship with the game environment of chess.
 
+## Installing and Setting Up Virtual Environment on Linux
+    $ python3 -m venv venv
+    $ source venv/bin/activate
+    $ pip install -r requirements.txt
+
 ## Interacting with the database
 1. Initialising database:
    * **flask db init**
@@ -43,12 +48,12 @@ The following commands at each step can be run in the terminal on VSCode. For it
    Use: **git add --all**
 
 
-5. Commit these changes (to your local copy of the repository).
+5. Commit these changes (to your local copy of the repository)
 
    Use: **git commit -m "commit_message_here"**
 
 
-6. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub.
+6. Push these commits from your branch on your local copy of the repository up to the repository stored on GitHub
 
    Use: **git push**
 
