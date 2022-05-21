@@ -1,3 +1,10 @@
+body{
+  text-transform:uppercase;
+  font-size: xxx-large;
+  color: white;
+  text-align: center;
+  font-family: Sans-serif;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -12,6 +19,12 @@ ul {
 } */
 .navbar-nav{
   margin-left: auto;
+}
+.navbar-text{
+  padding-left: 35vw;
+  padding-right: 35vw;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 li a {
@@ -29,8 +42,8 @@ li a:hover {
 .active {
   background-color: #04AA6D;
 }
+
 td {
-    /* background-color: rgb(0, 0, 0); */
     text-transform:uppercase;
     font-size: xxx-large;
     color: white;
@@ -40,37 +53,46 @@ td {
     height: 12.5%;
   }
 
-  tr:nth-child(even) td:nth-child(even), tr:nth-child(odd) td:nth-child(odd) {
+  #board tr:nth-child(even) td:nth-child(even), #board tr:nth-child(odd) td:nth-child(odd) {
     background: rgb(85, 108, 83);
   }
-  tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
-    background: rgba(255, 255, 255, 0.582);
+  #board tr:nth-child(odd) td:nth-child(even), #board tr:nth-child(even) td:nth-child(odd) {
+    background: rgba(87, 87, 87, 0.582);
   }
 
-  td:hover{
-    background: rgba(129, 140, 114, 0.759) !important;
+  #board td:hover{
+    background: rgba(76, 83, 67, 0.759) !important;
   }
 
-  table {
+  #board {
     table-layout: auto;
-    background-color: rgb(0, 0, 0);
     border-style: double border;
-    margin-left: auto;
-    margin-right: auto;
+    margin:auto;
+    padding: 2vmin;
+    /* margin-left: 20vmin;
+    float: left; */
     width: 80vmin;
     height:80vmin;
   }
  
+  #board-container{
+    margin:auto;
+    float:left;
+    padding-left:10vw;
+    display:flex;
+    justify-content: center;
+  }
+
   .occupied {
-    background-color: rgb(255, 0, 0)!important;
+    background-color: rgba(106, 26, 26, 0.81)!important;
   }
   
   .targeted {
-    background-color: rgb(228, 228, 24)!important;
+    background-color: rgba(165, 165, 80, 0.892)!important;
   }
   
   .selected {
-    background-color: rgb(216, 216, 216)!important;
+    background-color: rgb(238, 229, 229)!important;
     filter: grayscale(80%);
   }
   
@@ -95,4 +117,55 @@ td {
   body {
     background-color: whitesmoke;
   }
+
+  .functions-container{
+    float:right;
+    display: flex;
+    justify-content: center;
+    margin-right:5vmin;
+    padding:5vmin;
+    width:20vmin;
+  }
+
+  .piece-container{
+    padding-right:5vmin;
+    padding-left:1vmin;
+    padding-bottom: 2vmin;
+  }
+
+  #piecetable{
+    table-layout: auto;
+    background-color: rgb(184, 155, 77) !important;
+    padding:1vmin;
+    /* margin-right: auto;  */
+    float: right;
+  }
   
+  #piecetable td{
+    border:2px solid black;
+    border-style: double border;
+    width: 8vmin;
+    height:8vmin;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+  }
+  
+  #h_pieces{
+    padding: 1vmin;
+  }
+
+  .btns-container{
+    padding-right:5vmin;
+    padding-left:1vmin;
+    padding-top: 10vmin; 
+    padding-bottom: 5vmin;
+    margin:auto;
+  }
+  .button{
+    border: 2px solid black;
+    border-radius:1.5vmin;
+    background-color: rgb(82, 72, 56);
+    color: white;
+    padding: 1vmin;
+  }
+
