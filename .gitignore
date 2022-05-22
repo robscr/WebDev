@@ -2,6 +2,6 @@
 
 .venv
 
-venvls
+venv
 
 */__pycache__/*
