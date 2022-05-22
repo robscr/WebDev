@@ -4,6 +4,7 @@ import os
 
 from app.forms import LoginForm
 from app import db
+from flask_login import current_user, login_user
 from app.models import User
 
 from passlib.hash import sha256_crypt
@@ -11,7 +12,8 @@ from passlib.hash import sha256_crypt
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
-
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
 
     users = User.query.all()
@@ -44,6 +46,7 @@ def login():
                 session['id'] = session_id
                 global user
                 user = someone
+                login_user(user, remember=True)
                 return redirect(url_for('index'))
 
         return render_template('login.html', form=form, error_message="[INVALID USERNAME OR PASSWORD]")
