@@ -25,9 +25,12 @@ def login():
         if request.method == 'POST':
             username = request.form.get('username')
             password = request.form.get('password')
+            
 
         for someone in properties_list:
-            if (username == someone[1]) and (password == someone[2]):
+            password_hash = str(someone[2])
+            verification = sha256_crypt.verify(password, password_hash)
+            if (username == someone[1]) and (verification == True):
                 session['user'] = username
                 global user
                 user = someone
@@ -74,7 +77,10 @@ def register():
     
     if form.validate_on_submit():
         #hashed_password = 
-        user = User(username=form.username.data, password_hash=form.password.data)
+        raw_password = form.password.data
+        encrypted_password = sha256_crypt.encrypt(raw_password)
+
+        user = User(username=form.username.data, password_hash=encrypted_password)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('index'))
