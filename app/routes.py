@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, session, abort, req
 from app import app
 import os
 
-from app.forms import LoginForm, PostData
+from app.forms import LoginForm
 from app import db
 from app.models import User
 
