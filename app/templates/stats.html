@@ -54,12 +54,12 @@
     </div>
   
     <div class="stat-container">
-      <div class="stat">0</div>
+      <div class="stat">{{ average_guesses }}</div>
       <div class="label">Average Squares</div>
     </div>
   
     <div class="stat-container">
-      <div class="stat">0</div>
+      <div class="stat"></div>
       <div class="label">Average percentile</div>
     </div>
   
@@ -67,7 +67,11 @@
   </div>
       <h1 class="sub">LeaderBoard</h1>
       <div class="table-container">
-
+        <table>
+          <tr><td style="color:black">{{ top_1_user }}</td><td style="color:black">{{ top_1_score }}</td></tr>
+          <tr><td style="color:black">{{ top_2_user }}</td><td style="color:black">{{ top_2_score }}</td></tr>
+          <tr><td style="color:black">{{ youser }}</td><td style="color:black">{{ youser_score }}</td></tr>
+        </table>
       </div>
   </div>
     </div>
