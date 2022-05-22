@@ -64,12 +64,38 @@
             <table class="col-12" id="piecetable">
             </table>
           </div>
-            
-          <div class="row">
-            <div class="guess-container col">
-              <div id="guesscount" class="guess">0</div>
-              <div id= "guess label" class="label">Guesses</div>
+          <!-- Functions Container -->
+          <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+            <div class="container" id="functions-container">
+                <!--Puzzle Pieces-->
+              <div class="row justify-content-center">
+                <div id="h_pieces" class="col-12 text-center">
+                  Pieces:
+                </div>
+              <div class="row justify-content-center">  
+                <table class="col pieceKey" id="piecetable">
+                </table>
+              </div>
+              <!--Performance Tracking--> 
+              <div class="row justify-content-center">
+                <div class="guess-container col-6">
+                  <div id="guesscount" class="guess">0</div>
+                  <div id= "guess label" class="label">Guesses</div>
+                </div>
+                <div class="turn-container col-6">   
+                  <div id="turncount" class="turn">8</div>
+                  <div id= "turn label" class="label">Turns Remaining</div>
+                </div>
+              </div>
+                <!--Buttons-->
+              <div class="row justify-content-center btns">
+                <button type="button" class="button col-4" onclick="guess()">Guess</button>
+                <button type="button" class="button col-4" onclick="showPositions()">Show Pos.</button>
+                <button type="button" class="button col-4" onclick="resetflags()">Clear Flags</button>
+              </div>
+              
             </div>
+<<<<<<< HEAD
             <div class="turn-container col">   
               <div id="turncount" class="turn">0</div>
               <div id= "turn label" class="label">Turns Remaining</div>
@@ -94,6 +120,8 @@
 
             <button type="submit" class="button col" onclick="resetflags()">Clear Flags {{games_played}}</button>
           </div>
+=======
+>>>>>>> 42ad52517f73f6f0683ad12040c23b84c6609267
           
         </div>
       </div>
