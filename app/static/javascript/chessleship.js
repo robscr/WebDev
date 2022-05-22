@@ -319,18 +319,18 @@ function guess() {
 function addPieceToCell(cell, src) {
   let piece_image = document.createElement("img");
   piece_image.src = src;
-  piece_image.width = "60";
-  piece_image.height = "60";
-  // piece_image.classsList.add();
+  piece_image.width = "40";
+  piece_image.height = "40";
+  piece_image.className = "pieceimage";
   cell.appendChild(piece_image);
 }
 
 function addPieceByIndex(row, column, src) {
   let piece_image = document.createElement("img");
   piece_image.src = src;
-  piece_image.width = "60";
-  piece_image.height = "60";
-  // piece_image.classsList.add("piece","boardpiece");
+  piece_image.width = "40";
+  piece_image.height = "40";
+  piece_image.className = "pieceimage";
   let cell = document.getElementById("board").rows[row].cells[column];
   cell.appendChild(piece_image);
 }
