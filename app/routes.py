@@ -32,6 +32,7 @@ def login():
             password = request.form.get('password')
         
         for someone in users:
+            session_id = someone.id
             try:
                 hashed = User.query.all()[someone.id].password_hash
                 verification = sha256_crypt.verify(password, hashed)
@@ -40,6 +41,7 @@ def login():
             
             if (username == someone.username) and (verification == True):
                 session['user'] = username
+                session['id'] = session_id
                 global user
                 user = someone
                 return redirect(url_for('index'))
@@ -74,7 +76,12 @@ def settings():
 @app.route('/stats')
 @app.route('/stats.html')
 def stats():
-    return render_template('stats.html')
+    users = User.query.all()
+    #user = session['user']
+    identity = session['id']
+    num_games = User.query.get(int(identity)).games_played
+    
+    return render_template('stats.html', games_played=num_games)
 
 
 #Sample from Tom's tutorial
