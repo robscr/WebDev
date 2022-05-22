@@ -96,7 +96,8 @@ def stats():
         stats_list = []
 
         for user in users:
-            stats_list.append((user.games_played, user.username))
+            average_guess = round(float(user.average_guesses) / float(user.games_played))
+            stats_list.append((average_guess, user.username))
         stats_list = sorted(stats_list)
 
         top_1_score = stats_list[-1][0]
