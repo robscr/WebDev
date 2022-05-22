@@ -76,12 +76,29 @@ def settings():
 @app.route('/stats')
 @app.route('/stats.html')
 def stats():
-    users = User.query.all()
-    #user = session['user']
+    
+    this_user = session['user']
     identity = session['id']
     num_games = User.query.get(int(identity)).games_played
+    num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 4)
+
+    users = User.query.all()
+    stats_list = []
+
+    for user in users:
+        stats_list.append((user.games_played, user.username))
+    stats_list = sorted(stats_list)
+
+    top_1_score = stats_list[-1][0]
+    top_1_user = stats_list[-1][1]
+
+    top_2_score = stats_list[-2][0]
+    top_2_user = stats_list[-2][1]
+
+    youser_score = num_games
+    youser = this_user
     
-    return render_template('stats.html', games_played=num_games)
+    return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_1_user=top_1_user, top_2_user=top_2_user, youser_score=youser_score, youser=youser)
 
 
 #Sample from Tom's tutorial
@@ -96,9 +113,12 @@ def register():
         raw_password = form.password.data
         encrypted_password = sha256_crypt.hash(raw_password)
 
-        user = User(username=form.username.data, password_hash=encrypted_password)
+        user = User(username=form.username.data, password_hash=encrypted_password, games_played=0, average_guesses=0.0)
         db.session.add(user)
         db.session.commit()
+
+        session['user'] = form.username.data
+        session['id'] = user.id
         return redirect(url_for('index'))
 
     #if form.validate_on_submit():
@@ -110,24 +130,32 @@ def register():
     
     return render_template('register.html', title='sign in', form=form)
 
-show_clicked = 0
+
+#Decorators to handle user stat tracking
 @app.route('/gameplay', methods=['GET', 'POST'])
 def gameplay():
     if request.method == 'POST':
 
         user_id = session['id']
         user = User.query.get(user_id)
-        user.games_played = User.games_played + 2
+        user.games_played = User.games_played + 1
+
         db.session.commit()
 
-        games_played = User.query.get(user_id).games_played
-        
-        
-        return render_template("chessleship.html", games_played=games_played)
+        return render_template("chessleship.html")
 
     return render_template('index.html')
-    #Get webpage to POST that game has been played
 
-    #receive the POST information
-    #retrieve the games_played value for the user from the database
-    #increment it by one
+@app.route('/guess', methods=['GET', 'POST'])
+def guess():
+    if request.method == 'POST':
+
+        user_id = session['id']
+        user = User.query.get(user_id)
+        user.average_guesses = User.average_guesses + 1
+
+        db.session.commit()
+
+        return render_template("chessleship.html")
+
+    return render_template('index.html')
