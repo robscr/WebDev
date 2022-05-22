@@ -95,12 +95,12 @@ def index():
                 session['id'] = session_id
                 global user
                 user = someone
-                return redirect(url_for('index'))
+                return redirect(url_for('index'), form=form)
 
         return "<h1>Wrong username or password - placeholder</h1>"
         
     #return render_template('login.html', form=form)
-    return render_template('chessleship.html')
+    return render_template('chessleship.html', form=form)
 
 @app.route('/rules')
 @app.route('/rules.html')
