@@ -49,13 +49,15 @@
                     {% for error in form.password.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
+                    <span style="color:red">{{error_message}}</span>
                 </p>
+                    
                 <p style="font-family: 'Arial'">{{ form.remember_me() }} {{ form.remember_me.label }}</p>
                 <p style="font-family: 'Arial'">{{ form.submit() }}</p>
             </form>
 
         </div>
-
+        
         <div>
             <a href="/register" style="font-family: 'Arial'">New to ChessleShip? Register an account here!</a>
         </div>

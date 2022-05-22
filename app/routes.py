@@ -46,7 +46,7 @@ def login():
                 user = someone
                 return redirect(url_for('index'))
 
-        return "<h1>Wrong username or password - placeholder</h1>"
+        return render_template('login.html', form=form, error_message="[INVALID USERNAME OR PASSWORD]")
         
     return render_template('login.html', form=form)
 
