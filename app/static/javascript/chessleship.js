@@ -308,6 +308,9 @@ function guess() {
   }
   //Reset guessCounter
   if (guessCounter > 0) {
+    for(let guess = 0; guess<guessCounter; guess++){
+      $.post('/guess');
+    }
     guessCounter = 0;
     turnCounter--;
     document.getElementById("turncount").firstChild.nodeValue = turnCounter;
@@ -439,6 +442,7 @@ function endGameSuccess() {
   alert("Found all the pieces");
   document.getElementById("popup-header").innerHTML = "You Win!"
   togglePopup();
+  $.post('/gameplay');
   // cell.classList.add("allfound");
 }
 
@@ -446,6 +450,7 @@ function endGameFail() {
   alert("Run out of turns");
   document.getElementById("popup-header").innerHTML = "You Lose"
   togglePopup();
+  $.post('/gameplay');
 }
 
 function main() {
