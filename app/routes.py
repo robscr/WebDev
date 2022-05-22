@@ -64,12 +64,11 @@ def login():
 @app.route('/index')
 @app.route('/chessleship.html')
 def index():
-    username = request.form.get('username')
+    #username = request.form.get('username')
 
     if ('user' in session and session['user'] == user[1]):
-    #if session.get('logged_in'):
-        #return render_template('chessleship.html')
         return render_template('chessleship.html')
+
     return redirect(url_for('login'))
 
 @app.route('/rules')
