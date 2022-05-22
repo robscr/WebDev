@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, session, abort, req
 from app import app
 import os
 
-from app.forms import LoginForm
+from app.forms import LoginForm, PostData
 from app import db
 from app.models import User
 
@@ -110,9 +110,22 @@ def register():
     
     return render_template('register.html', title='sign in', form=form)
 
-@app.route('/gameplay', methods=['POST'])
+show_clicked = 0
+@app.route('/gameplay', methods=['GET', 'POST'])
 def gameplay():
-    pass
+    if request.method == 'POST':
+
+        user_id = session['id']
+        user = User.query.get(user_id)
+        user.games_played = User.games_played + 2
+        db.session.commit()
+
+        games_played = User.query.get(user_id).games_played
+        
+        
+        return render_template("chessleship.html", games_played=games_played)
+
+    return render_template('index.html')
     #Get webpage to POST that game has been played
 
     #receive the POST information

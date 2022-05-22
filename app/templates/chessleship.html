@@ -77,9 +77,22 @@
           </div>
             
           <div class="row btns">
+            
             <button type="button" class="button col" onclick="guess()">Guess</button>
-            <button type="button" class="button col" onclick="showPositions()">Show Positions</button>
-            <button type="button" class="button col" onclick="resetflags()">Clear Flags</button>
+
+
+            
+            <input id="show_positions" value="Show Positions" type="submit" class="button col" onclick="showPositions()">Show Positions
+              <script>
+                $("input#show_positions").click(function() {
+                  $.post('/gameplay');
+                });
+              </script>
+            </input>
+          
+
+
+            <button type="submit" class="button col" onclick="resetflags()">Clear Flags {{games_played}}</button>
           </div>
           
         </div>
