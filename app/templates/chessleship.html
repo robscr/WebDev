@@ -48,6 +48,7 @@
   <!--Pages Content-->
 
   <body onload="main(), togglePopup()">
+    {% if active_session != None %}
     <!-- Login popup -->
     <script>
       function togglePopup() {
@@ -74,6 +75,7 @@
         
         </div>
     </div>
+    {% endif %}
     <div class="page-container">
           <!--Heading-->
       <div class="container-fluid">

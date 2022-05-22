@@ -95,7 +95,7 @@ def index():
                 session['id'] = session_id
                 global user
                 user = someone
-                return redirect(url_for('index'), form=form)
+                return redirect(url_for('index'), form=form, active_session=session['user'])
 
         return "<h1>Wrong username or password - placeholder</h1>"
         
