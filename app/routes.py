@@ -74,7 +74,6 @@ def register():
     form = LoginForm()
     
     if form.validate_on_submit():
-
         raw_password = form.password.data
         encrypted_password = sha256_crypt.hash(raw_password)
 
