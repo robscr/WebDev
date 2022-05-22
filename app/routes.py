@@ -9,6 +9,7 @@ from app.models import User
 from passlib.hash import sha256_crypt
 
 @app.route('/login', methods=['GET', 'POST'])
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
 
     form = LoginForm()
@@ -40,10 +41,12 @@ def login():
 @app.route('/index')
 @app.route('/chessleship.html')
 def index():
-    if ('user' in session and session['user'] == user[1]):
-        return render_template('chessleship.html')
+    #Require login to access game:
+    # ('user' in session and session['user'] == user[1]):
+    #    return render_template('chessleship.html')
 
-    return redirect(url_for('login'))
+    #return redirect(url_for('login'))
+    return render_template('chessleship.html')
 
 @app.route('/rules')
 @app.route('/rules.html')
