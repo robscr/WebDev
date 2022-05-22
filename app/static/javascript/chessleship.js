@@ -391,6 +391,7 @@ function removeFromPieceTable(pieceType, pieceInfoArray) {
   }
   if (piecesFound == pieceInfoArray.length){
     alert("Found all the pieces");
+    
     // cell.classList.add("allfound");
   }
 }
