@@ -4,6 +4,7 @@ import os
 
 from app.forms import LoginForm
 from app import db
+from flask_login import current_user, login_user, logout_user
 from app.models import User
 
 from passlib.hash import sha256_crypt
@@ -11,7 +12,8 @@ from passlib.hash import sha256_crypt
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
-
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
 
     users = User.query.all()
@@ -44,12 +46,17 @@ def login():
                 session['id'] = session_id
                 global user
                 user = someone
+                login_user(user, remember=True)
                 return redirect(url_for('index'))
 
-        return "<h1>Wrong username or password - placeholder</h1>"
+        return render_template('login.html', form=form, error_message="[INVALID USERNAME OR PASSWORD]")
         
     return render_template('login.html', form=form)
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/')
 @app.route('/index')
@@ -76,36 +83,52 @@ def settings():
 @app.route('/stats')
 @app.route('/stats.html')
 def stats():
-    
-    this_user = session['user']
-    identity = session['id']
-    num_games = User.query.get(int(identity)).games_played
-    num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 4)
+    #if not logged in will redirect to the login page
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    try:
+        this_user = session['user']
+        identity = session['id']
+        num_games = User.query.get(int(identity)).games_played
+        num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 4)
 
-    users = User.query.all()
-    stats_list = []
+        users = User.query.all()
+        stats_list = []
 
-    for user in users:
-        stats_list.append((user.games_played, user.username))
-    stats_list = sorted(stats_list)
+        for user in users:
+            stats_list.append((user.games_played, user.username))
+        stats_list = sorted(stats_list)
 
-    top_1_score = stats_list[-1][0]
-    top_1_user = stats_list[-1][1]
+        top_1_score = stats_list[-1][0]
+        top_1_user = stats_list[-1][1]
 
-    top_2_score = stats_list[-2][0]
-    top_2_user = stats_list[-2][1]
+        top_2_score = stats_list[-2][0]
+        top_2_user = stats_list[-2][1]
 
-    youser_score = num_games
-    youser = this_user
-    
-    return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_1_user=top_1_user, top_2_user=top_2_user, youser_score=youser_score, youser=youser)
+        top_3_score = stats_list[-3][0]
+        top_3_user = stats_list[-3][1]
 
+        top_4_score = stats_list[-4][0]
+        top_4_user = stats_list[-4][1]
+
+        top_5_score = stats_list[-5][0]
+        top_5_user = stats_list[-5][1]
+
+        youser_score = num_games
+        youser = this_user
+        
+        return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_3_score=top_3_score, top_4_score=top_4_score, top_5_score=top_5_score,top_1_user=top_1_user, top_2_user=top_2_user,top_3_user=top_3_user,top_4_user=top_4_user, top_5_user=top_5_user,youser_score=youser_score, youser=youser)
+    except:
+        return redirect(url_for('login'))
 
 #Sample from Tom's tutorial
 @app.route('/register', methods=['GET', 'POST'])
 @app.route('/register.html', methods=['GET', 'POST'])
 def register():
     
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     form = LoginForm()
     
     if form.validate_on_submit():
@@ -119,6 +142,7 @@ def register():
 
         session['user'] = form.username.data
         session['id'] = user.id
+        login_user(user, remember=True)
         return redirect(url_for('index'))
 
     #if form.validate_on_submit():
