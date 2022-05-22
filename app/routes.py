@@ -83,7 +83,8 @@ def settings():
 @app.route('/stats')
 @app.route('/stats.html')
 def stats():
-    if current_user.is_authenticated == False:
+    #if not logged in will redirect to the login page
+    if not current_user.is_authenticated:
         return redirect(url_for('login'))
     try:
         this_user = session['user']
