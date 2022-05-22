@@ -63,3 +63,6 @@ The following commands at each step can be run in the terminal on VSCode. For it
 
 
 Be sure to commit regularly, to provide robust version control. Probably also a good idea to only change one document at a time between commits.
+
+## Pulling from Main
+After pulling from main, push to your branch on origin (e.g. origin Lachy) to keep that branch up to date
