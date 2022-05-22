@@ -2,11 +2,11 @@ from flask import render_template, url_for, flash, redirect, session, abort, req
 from app import app
 import os
 
-#from flask_login import LoginManager
 from app.forms import LoginForm
 from app import db
 from app.models import User
 
+from passlib.hash import sha256_crypt
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -68,6 +68,7 @@ def register():
     form = LoginForm()
     
     if form.validate_on_submit():
+        #hashed_password = 
         user = User(username=form.username.data, password_hash=form.password.data)
         db.session.add(user)
         db.session.commit()
