@@ -4,7 +4,7 @@ import os
 
 from app.forms import LoginForm
 from app import db
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from app.models import User
 
 from passlib.hash import sha256_crypt
@@ -53,6 +53,10 @@ def login():
         
     return render_template('login.html', form=form)
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/')
 @app.route('/index')
@@ -79,6 +83,8 @@ def settings():
 @app.route('/stats')
 @app.route('/stats.html')
 def stats():
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
     try:
         this_user = session['user']
         identity = session['id']
@@ -119,6 +125,9 @@ def stats():
 @app.route('/register.html', methods=['GET', 'POST'])
 def register():
     
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     form = LoginForm()
     
     if form.validate_on_submit():
@@ -132,6 +141,7 @@ def register():
 
         session['user'] = form.username.data
         session['id'] = user.id
+        login_user(user, remember=True)
         return redirect(url_for('index'))
 
     #if form.validate_on_submit():
