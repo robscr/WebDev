@@ -10,11 +10,14 @@
     <body>
 
         <div>
-            <form action="" method="post" novalidate>
+            <form action="/register" method="POST" novalidate>
                 {{ form.hidden_tag() }}
                 <p style="font-family: 'Arial'">
                     {{ form.username.label }}<br>
                     {{ form.username(size=32) }}<br>
+                    {% for error in form.username.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
 
                 </p>
                 <p style="font-family: 'Arial'">
