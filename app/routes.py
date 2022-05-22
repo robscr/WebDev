@@ -76,30 +76,31 @@ def settings():
 @app.route('/stats')
 @app.route('/stats.html')
 def stats():
-    
-    this_user = session['user']
-    identity = session['id']
-    num_games = User.query.get(int(identity)).games_played
-    num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 4)
+    try:
+        this_user = session['user']
+        identity = session['id']
+        num_games = User.query.get(int(identity)).games_played
+        num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 4)
 
-    users = User.query.all()
-    stats_list = []
+        users = User.query.all()
+        stats_list = []
 
-    for user in users:
-        stats_list.append((user.games_played, user.username))
-    stats_list = sorted(stats_list)
+        for user in users:
+            stats_list.append((user.games_played, user.username))
+        stats_list = sorted(stats_list)
 
-    top_1_score = stats_list[-1][0]
-    top_1_user = stats_list[-1][1]
+        top_1_score = stats_list[-1][0]
+        top_1_user = stats_list[-1][1]
 
-    top_2_score = stats_list[-2][0]
-    top_2_user = stats_list[-2][1]
+        top_2_score = stats_list[-2][0]
+        top_2_user = stats_list[-2][1]
 
-    youser_score = num_games
-    youser = this_user
-    
-    return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_1_user=top_1_user, top_2_user=top_2_user, youser_score=youser_score, youser=youser)
-
+        youser_score = num_games
+        youser = this_user
+        
+        return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_1_user=top_1_user, top_2_user=top_2_user, youser_score=youser_score, youser=youser)
+    except:
+        return redirect(url_for('login'))
 
 #Sample from Tom's tutorial
 @app.route('/register', methods=['GET', 'POST'])
