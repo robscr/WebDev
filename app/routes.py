@@ -95,10 +95,19 @@ def stats():
         top_2_score = stats_list[-2][0]
         top_2_user = stats_list[-2][1]
 
+        top_3_score = stats_list[-3][0]
+        top_3_user = stats_list[-3][1]
+
+        top_4_score = stats_list[-4][0]
+        top_4_user = stats_list[-4][1]
+
+        top_5_score = stats_list[-5][0]
+        top_5_user = stats_list[-5][1]
+
         youser_score = num_games
         youser = this_user
         
-        return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_1_user=top_1_user, top_2_user=top_2_user, youser_score=youser_score, youser=youser)
+        return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_3_score=top_3_score, top_4_score=top_4_score, top_5_score=top_5_score,top_1_user=top_1_user, top_2_user=top_2_user,top_3_user=top_3_user,top_4_user=top_4_user, top_5_user=top_5_user,youser_score=youser_score, youser=youser)
     except:
         return redirect(url_for('login'))
 
