@@ -87,7 +87,10 @@ th, td{
   border-style: double border;
   padding: 2vmin;
   width: 75vmin;
+  min-width:75vmin;
+  max-width: 75vw;
   height:75vmin;
+  max-height:75vw;
   /* margin-left: 20vmin;
   float: left; */
   /* width: 80vmin;
@@ -171,11 +174,10 @@ body {
   padding: 1vmin;
 }
 
-.btns-container{
+.btns{
   /* padding-right:5vmin;
   padding-left:1vmin; */
-  padding-top: 10vmin; 
-  padding-bottom: 5vmin;
+  padding-top: 2.5vmin; 
   /* float:right; */
 }
 .button{
