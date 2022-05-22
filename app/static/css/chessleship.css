@@ -67,6 +67,7 @@ h2.text-responsive{
   font-weight: bold;  
 }
 
+/* whole page background etc*/ 
 .page-container{
   background: url("/static/images/queensgambit.jpg") no-repeat center fixed;
   background-size: cover;
@@ -113,8 +114,8 @@ td {
     text-align: center;
     font-family: "Courier New", Courier, monospace;
     font-weight: bold;
-    width: 12.5%;
-    height: 12.5%;
+    width: 12.5% ;
+    height: 12.5% ;
     overflow: hidden;
 }
 th, td{
