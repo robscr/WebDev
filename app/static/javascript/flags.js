@@ -182,9 +182,9 @@ function flag(row, column, targeted) {
     var annotation = document.createElement("img");
     annotation.src = src;
     annotation.id = id;
-    annotation.width = "30"
-    annotation.height = "30"
-    annotation.classList.add("flag");
+    // annotation.width = "30"
+    // annotation.height = "30"
+    annotation.classList.add("SMflag", "flag");
     let cell = document.getElementById("board").rows[row].cells[column];
     cell.appendChild(annotation);
   }
@@ -197,12 +197,13 @@ function flag(row, column, targeted) {
   
   function addFlagImage(cell, src) {
     let piece_image = document.createElement("img");
-    
+    // let div = document.createElement("")
     piece_image.src = src;
     piece_image.id = "flag";
-    piece_image.width = "60";
-    piece_image.height = "60";
-    piece_image.classList.add("flag");
+    // piece_image.width = "60";
+    // piece_image.height = "60";
+    piece_image.classList.add("LGflag","flag");
+    // cell.classList.add("qflag");
     cell.appendChild(piece_image);
   }
 
