@@ -19,22 +19,31 @@ def login():
 
     for someone in users:
         properties_list.append((someone.id, someone.username, someone.password_hash))
+    
+    hash_list = []
+
+    for someone in users:
+        hash_list.append(someone.password_hash)
 
     if form.validate_on_submit():
 
         if request.method == 'POST':
             username = request.form.get('username')
             password = request.form.get('password')
+        
+        for someone in users:
+            try:
+                hashed = User.query.all()[someone.id].password_hash
+                verification = sha256_crypt.verify(password, hashed)
+            except:
+                pass
             
-
-        for someone in properties_list:
-            password_hash = str(someone[2])
-            verification = sha256_crypt.verify(password, password_hash)
-            if (username == someone[1]) and (verification == True):
+            if (username == someone.username) and (verification == True):
                 session['user'] = username
                 global user
                 user = someone
                 return redirect(url_for('index'))
+
         return "<h1>Wrong username or password - placeholder</h1>"
         
     return render_template('login.html', form=form)
@@ -78,7 +87,7 @@ def register():
     if form.validate_on_submit():
         #hashed_password = 
         raw_password = form.password.data
-        encrypted_password = sha256_crypt.encrypt(raw_password)
+        encrypted_password = sha256_crypt.hash(raw_password)
 
         user = User(username=form.username.data, password_hash=encrypted_password)
         db.session.add(user)
