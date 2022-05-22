@@ -2,13 +2,14 @@ from flask import render_template, url_for, flash, redirect, session, abort, req
 from app import app
 import os
 
-#from flask_login import LoginManager
 from app.forms import LoginForm
 from app import db
 from app.models import User
 
+from passlib.hash import sha256_crypt
 
 @app.route('/login', methods=['GET', 'POST'])
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
 
     form = LoginForm()
@@ -41,10 +42,12 @@ def login():
 @app.route('/chessleship')
 @app.route('/chessleship.html')
 def index():
-    if ('user' in session and session['user'] == user[1]):
-        return render_template('chessleship.html')
+    #Require login to access game:
+    # ('user' in session and session['user'] == user[1]):
+    #    return render_template('chessleship.html')
 
-    return redirect(url_for('login'))
+    #return redirect(url_for('login'))
+    return render_template('chessleship.html')
 
 @app.route('/rules')
 @app.route('/rules.html')
@@ -70,6 +73,7 @@ def register():
     form = LoginForm()
     
     if form.validate_on_submit():
+        #hashed_password = 
         user = User(username=form.username.data, password_hash=form.password.data)
         db.session.add(user)
         db.session.commit()
