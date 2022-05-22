@@ -1,22 +1,25 @@
-from flask import render_template, url_for, flash, redirect, session, abort, request
+from flask import render_template, url_for, flash, redirect, session
 from app import app
-import os
 
-from app.forms import LoginForm
-from app import db
-from app.models import User
 
-from passlib.hash import sha256_crypt
+# @app.route('/')
+# @app.route('/index')
+# def index():
 
-@app.route('/login', methods=['GET', 'POST'])
-@app.route('/login.html', methods=['GET', 'POST'])
-def login():
+#     user = {'username': "Tim"}
 
-    form = LoginForm()
+<<<<<<< HEAD
+#     some_content = [
+#         {
+#             'creator': {'username': 'John Appleseed'},
+#             'content': 'This is the first piece of content'
+#         },
 
-    users = User.query.all()
-    properties_list = []
-
+#         {
+#             'creator': {'username': 'John Doe'},
+#             'content': 'This is another piece of content'
+#         },
+=======
     for someone in users:
         properties_list.append((someone.id, someone.username, someone.password_hash))
     
@@ -47,18 +50,21 @@ def login():
         return "<h1>Wrong username or password - placeholder</h1>"
         
     return render_template('login.html', form=form)
+>>>>>>> 0d67e4249e2bc631864b13a8ef45619c74fd1404
 
+#         {
+#             'creator': {'username': 'John Citizen'},
+#             'content': 'All this content is written by John(?)'
+#         }
+#     ]
+#     return render_template("index.html", title="Sample Title", user=user, content=some_content)
 
 @app.route('/')
 @app.route('/index')
-@app.route('/chessleship')
 @app.route('/chessleship.html')
 def index():
-    #Require login to access game:
-    # ('user' in session and session['user'] == user[1]):
+    #if session.get('logged_in'):
     #    return render_template('chessleship.html')
-
-    #return redirect(url_for('login'))
     return render_template('chessleship.html')
 
 @app.route('/rules')
@@ -76,20 +82,30 @@ def settings():
 def stats():
     return render_template('stats.html')
 
+#@app.route('/login')
+#def login():
+    #return render_template('login.html')
 
 #Sample from Tom's tutorial
+from app.forms import LoginForm
+from app import db
+from app.models import User
+
 @app.route('/register', methods=['GET', 'POST'])
-@app.route('/register.html', methods=['GET', 'POST'])
 def register():
     
     form = LoginForm()
     
     if form.validate_on_submit():
+<<<<<<< HEAD
+        user = User(username=form.username.data, password_hash=form.password.data)
+=======
         #hashed_password = 
         raw_password = form.password.data
         encrypted_password = sha256_crypt.hash(raw_password)
 
         user = User(username=form.username.data, password_hash=encrypted_password)
+>>>>>>> 0d67e4249e2bc631864b13a8ef45619c74fd1404
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('index'))
