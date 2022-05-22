@@ -20,6 +20,7 @@ var guessCounter = 0;
 //GuessCount counts total number of guesses in game 
 var guessCount = 0;
 
+var piecesFound = 0;
 
 //Initialise empty arrays
 var positionArray = new Array(); //Contains information about whether cells are occupied/targeted/empty and the number of pieces targeting targeted cells
@@ -375,6 +376,7 @@ function removePiece(row, column, pieceInfoArray) {
       break;
   }
 }
+
 function removeFromPieceTable(pieceType, pieceInfoArray) {
   for (var i = 0; i < pieceInfoArray.length; i++) {
     let cell = document.getElementById("piecetable").rows[0].cells[i];
@@ -383,10 +385,14 @@ function removeFromPieceTable(pieceType, pieceInfoArray) {
       !cell.classList.contains("found")
     ) {
       cell.classList.add("found");
-      return;
+      piecesFound ++;
+      break;
     }
   }
-  alert("Found all the pieces");
+  if (piecesFound == pieceInfoArray.length){
+    alert("Found all the pieces");
+    // cell.classList.add("allfound");
+  }
 }
 
 function updateBoard() {
