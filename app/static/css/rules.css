@@ -9,30 +9,47 @@ body{
     font-size: large;
     color: rgb(27, 18, 18);
     text-align: center;
-    font-family: Sans-serif;
-    margin-left:33vw;
-    margin-right:33vw;
+    font-size: calc( 0.5vh + 1vw);
 }
 .rule_desc{
     color: rgb(27, 18, 18);
-
-    font-family: Sans-serif;
-}
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+} 
 #rules_squares{
     font-size:large;
     text-transform: none;
-    margin-left:33vw;
+    font-size: calc( 0.5vh + 1vw);
+    text-align: left;
+    padding-left: 3vmin;
+    padding-right: 3vmin;
 }
 
 .rules_board{
     font-size: small;
-    width: 30vmin !important;
-    height:30vmin !important;
+    width: 90% !important;
+    height: 90% !important;
     margin-left: auto;
     margin-right: auto;
+    float:center;
+}
+
+.example{
+    width: 100%;
+    max-width: 70vh;
+}
+.boardex-container{
+    width:100%;
+    /* max-width: 20vw; */
+    /* min-height:35vh; */
+    margin-left: auto;
+    margin-right:auto;
+    justify-content: center;
+    /* max-height: 30vw; */
 }
 .example-container{
     justify-content: center;
+    /* min-height: 35vh; */
 }
 
 td{

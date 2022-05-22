@@ -1,14 +1,54 @@
-from flask import render_template, url_for, flash, redirect, session
+from flask import render_template, url_for, flash, redirect, session, request
 from app import app
+from passlib.hash import sha256_crypt
 
+from app.forms import LoginForm
+from app import db
+from app.models import User
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    users = User.query.all()
+    properties_list = []
+
+    for someone in users:
+        properties_list.append((someone.id, someone.username, someone.password_hash))
+    
+    hash_list = []
+
+    for someone in users:
+        hash_list.append(someone.password_hash)
+
+    if form.validate_on_submit():
+
+        if request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+        
+        for someone in users:
+            try:
+                hashed = User.query.all()[someone.id].password_hash
+                verification = sha256_crypt.verify(password, hashed)
+            except:
+                pass
+
+            if (username == someone.username) and (verification == True):
+                session['user'] = username
+                global user
+                user = someone
+                return redirect(url_for('index'))
+
+        return "<h1>Wrong username or password - placeholder</h1>"
+        
+    return render_template('login.html', form=form)
 
 @app.route('/')
 @app.route('/index')
 @app.route('/chessleship.html')
 def index():
-    #if session.get('logged_in'):
-    #    return render_template('chessleship.html')
-    return render_template('chessleship.html')
+    form = LoginForm()
+    return render_template('chessleship.html', form=form)
 
 @app.route('/rules')
 @app.route('/rules.html')
@@ -25,14 +65,8 @@ def settings():
 def stats():
     return render_template('stats.html')
 
-#@app.route('/login')
-#def login():
-    #return render_template('login.html')
-
 #Sample from Tom's tutorial
-from app.forms import LoginForm
-from app import db
-from app.models import User
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -40,7 +74,6 @@ def register():
     form = LoginForm()
     
     if form.validate_on_submit():
-        #hashed_password = 
         raw_password = form.password.data
         encrypted_password = sha256_crypt.hash(raw_password)
 
@@ -48,12 +81,5 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('index'))
-
-    #if form.validate_on_submit():
-    #    user = User()
-    #    
-    #    #flash('login requested for user {}, remember_me={}'.format(
-    #    #    form.username.data, form.remember_me.data))
-    #    return redirect(url_for('index'))
     
     return render_template('register.html', title='sign in', form=form)
