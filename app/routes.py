@@ -1,38 +1,49 @@
-from flask import render_template, url_for, flash, redirect, session
+from flask import render_template, url_for, flash, redirect, session, abort, request
 from app import app
+import os
+
+#from flask_login import LoginManager
+from app.forms import LoginForm
+from app import db
+from app.models import User
 
 
-# @app.route('/')
-# @app.route('/index')
-# def index():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
 
-#     user = {'username': "Tim"}
+    form = LoginForm()
 
-#     some_content = [
-#         {
-#             'creator': {'username': 'John Appleseed'},
-#             'content': 'This is the first piece of content'
-#         },
+    users = User.query.all()
+    properties_list = []
 
-#         {
-#             'creator': {'username': 'John Doe'},
-#             'content': 'This is another piece of content'
-#         },
+    for someone in users:
+        properties_list.append((someone.id, someone.username, someone.password_hash))
 
-#         {
-#             'creator': {'username': 'John Citizen'},
-#             'content': 'All this content is written by John(?)'
-#         }
-#     ]
-#     return render_template("index.html", title="Sample Title", user=user, content=some_content)
+    if form.validate_on_submit():
+
+        if request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+
+        for someone in properties_list:
+            if (username == someone[1]) and (password == someone[2]):
+                session['user'] = username
+                global user
+                user = someone
+                return redirect(url_for('index'))
+        return "<h1>Wrong username or password - placeholder</h1>"
+        
+    return render_template('login.html', form=form)
+
 
 @app.route('/')
 @app.route('/index')
 @app.route('/chessleship.html')
 def index():
-    #if session.get('logged_in'):
-    #    return render_template('chessleship.html')
-    return render_template('chessleship.html')
+    if ('user' in session and session['user'] == user[1]):
+        return render_template('chessleship.html')
+
+    return redirect(url_for('login'))
 
 @app.route('/rules')
 @app.route('/rules.html')
@@ -49,15 +60,8 @@ def settings():
 def stats():
     return render_template('stats.html')
 
-#@app.route('/login')
-#def login():
-    #return render_template('login.html')
 
 #Sample from Tom's tutorial
-from app.forms import LoginForm
-from app import db
-from app.models import User
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     
