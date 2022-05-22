@@ -1,3 +1,6 @@
+var flagCountsm = 0;
+var flagCountlg = 0;
+
 function resetflags() {
   for (var i = 0; i < positionArray.length; i++) {
     for (var j = 0; j < positionArray.length; j++) {
@@ -177,7 +180,7 @@ function flag(row, column, targeted) {
       }
   }
 
-
+// Uncomment append & remove for annotation for small flags 
   function addAnnotation(row, column, id, src) {
     var annotation = document.createElement("img");
     annotation.src = src;
@@ -186,13 +189,16 @@ function flag(row, column, targeted) {
     // annotation.height = "30"
     annotation.classList.add("SMflag", "flag");
     let cell = document.getElementById("board").rows[row].cells[column];
-    cell.appendChild(annotation);
-  }
+    // cell.appendChild(annotation);
+    // if(flagCountlg < 4){
+    //   cell.appendChild(annotation);
+    // }
+    }
 
   function removeAnnotation(row, column, id) {
     let cell = document.getElementById("board").rows[row].cells[column];
     DOM_img = cell.querySelector('#'+id);
-    cell.removeChild(DOM_img);
+    // cell.removeChild(DOM_img);
   }
   
   function addFlagImage(cell, src) {
@@ -200,16 +206,18 @@ function flag(row, column, targeted) {
     // let div = document.createElement("")
     piece_image.src = src;
     piece_image.id = "flag";
-    // piece_image.width = "60";
-    // piece_image.height = "60";
     piece_image.classList.add("LGflag","flag");
-    // cell.classList.add("qflag");
     cell.appendChild(piece_image);
+    // if(flagCountlg < 4){
+    //   cell.appendChild(piece_image);
+    //   flagCountlg ++;
+    // }
   }
 
   function removeFlagImage(cell) {
     let DOM_img = cell.querySelector('#flag');
     cell.removeChild(DOM_img);
+    flagCountlg --;
   }
 
   
