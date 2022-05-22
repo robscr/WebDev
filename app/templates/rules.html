@@ -21,7 +21,7 @@
  
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)">♔</a>
+      <!-- <a class="navbar-brand" href="javascript:void(0)">♔</a> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,114 +33,41 @@
           <li class="nav-item">
             <a class="nav-link" href="#help">Log In</a>
           </li>
-          <span class="navbar-text">CHESSLESHIP</span>
+          <span class="navbar-text">CHESSLESHIP ♔</span>
           <li class="nav-item">
-            <a class="nav-link active" href="#stats">Stats</a>
+            <a class="nav-link" href="#stats">Stats</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <body>
-    <h1>HOW TO PLAY CHESSLESHIP!</h1>
-    <p class="rule_desc" id="rule_functions">
-        Try to uncover all the hidden pieces. <br><br>
-        Select the square with mouse/touch and press guess to uncover.<br><br>
-        Left click or press the "Flag" button to flag for a piece.<br> (keep clcking to cycle through or unflag) <br><br>
-    </p>
-    <div class="example-container">
-        <table id="board" class="rules_board">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>K</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-          </table>
-      
-          <p class="rule_desc" id="rules_squares">
+    <div class="page-container">
+      <h1>HOW TO PLAY CHESSLESHIP!</h1>
+      <p class="rule_desc" id="rule_functions">
+          Try to uncover all the hidden pieces with the least amount of guesses.<br><br>
+          Select up to 8 Squares with mouse/touch and press guess to uncover. <br>(This is 1 turn, but be careful you only have 8)<br><br>
+          Left click or press the "Flag" button to flag for a piece.<br> (keep clcking to cycle through or unflag) <br><br>
+      </p>
+      <div class="example-container">
+        <div class="row">
+          <div class="col-sm-0 col-md-1"></div>
+          <div class="boardex-container col-6">
+            <img class="example" src="/static/images/examplegame.jpg">
+          </div>
+        
+          <div class="rule_desc col-12 col-md-5" id="rules_squares">
               <br>
               Yellow Squares- Targeted by 1 or more pieces<br>
               The number in the Yellow Cells indicates how many STILL HIDDEN pieces target that square<br><br>
               Red Squares- You've Found a Piece!<br>
               The letter in the square tells yoy which one<br><br>
               Black Squares- Uh oh! No piece is targetting this square<br>
-          </p>
+          </div>
+        </div>    
+      </div>
     </div>
+    
   </body>
     
 </html>

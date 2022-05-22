@@ -252,7 +252,8 @@ function selectCell(cell) {
   if (
     !cell.classList.contains("selected") &&
     !cell.classList.contains("guessed") &&
-    guessCounter < NUMGUESSPERTURN
+    guessCounter < NUMGUESSPERTURN &&
+    turnCounter > 0
   ) {
     guessCounter++;
     guessCount++;
@@ -308,6 +309,12 @@ function guess() {
   resetflags();
   updateBoard();
 }
+// var ent = document.getElementById("ent");
+// ent.addEventListener("keydown", function (e) {
+//   if (e.code === "Enter") {  
+//     guess();
+//   }
+// });
 
 function addPieceToCell(cell, src) {
   let piece_image = document.createElement("img");

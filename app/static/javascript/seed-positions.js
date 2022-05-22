@@ -12,7 +12,7 @@ function generateSeed() {
   "" + date.getDate() + (date.getMonth() + 1) + date.getFullYear();
   dateseed = parseInt(dateseedstring);
   console.log("The dateseed is: " + dateseed);
-  return dateseed+1282376;
+  return dateseed+18926;
 }
 
 function generateGameParameters(seed) {
