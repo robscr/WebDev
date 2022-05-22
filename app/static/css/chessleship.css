@@ -16,6 +16,9 @@ ul {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
+.navbar{
+  height:50px;
+}
 .nav-item{
   background-color: #333;
 }
@@ -64,6 +67,13 @@ h2.text-responsive{
   font-weight: bold;  
 }
 
+.page-container{
+  background: url("/static/images/queensgambit.jpg") no-repeat center fixed;
+  background-size: cover;
+  background-blend-mode:color;
+  background-color: #8c8d8dc7 !important;
+  height: calc(100vh - 50px);
+}
 
 /* Table Style*/
 
@@ -110,14 +120,14 @@ th, td{
 }
 
 #board tr:nth-child(even) td:nth-child(even), #board tr:nth-child(odd) td:nth-child(odd) {
-  background: rgb(85, 108, 83);
+  background: rgb(97, 119, 95);
 }
 #board tr:nth-child(odd) td:nth-child(even), #board tr:nth-child(even) td:nth-child(odd) {
-  background: rgba(87, 87, 87, 0.582);
+  background: rgb(162, 162, 162);
 }
 
 #board td:hover{
-  background: rgba(76, 83, 67, 0.759) !important;
+  background: rgb(72, 78, 63) !important;
 }
 
 .occupied {
