@@ -63,10 +63,16 @@
             <!--Login Form-->
             <h1>Sign in</h1> 
             <div class="input-field">
-              <div class="validate">{{form.username.label}}{{form.username(size=32)}}</div>
+              <div class="validate">
+                {{form.username.label}}
+                {{form.username(size=32)}}
+              </div>
             </div>
             <div class="input-field">
-              <div class="validate">{{form.password.label}}{{form.password(size=32)}}</div>
+              <div class="validate">
+                {{form.password.label}}
+                {{form.password(size=32)}}
+              </div>
             </div>
               
             <button class="second-button">{{form.submit()}}</button>
