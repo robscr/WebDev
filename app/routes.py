@@ -1,25 +1,17 @@
-from flask import render_template, url_for, flash, redirect, session
+from flask import render_template, url_for, flash, redirect, session, request
 from app import app
+from passlib.hash import sha256_crypt
 
+from app.forms import LoginForm
+from app import db
+from app.models import User
 
-# @app.route('/')
-# @app.route('/index')
-# def index():
+@app.route('/login')
+def login():
+    form = LoginForm()
+    users = User.query.all()
+    properties_list = []
 
-#     user = {'username': "Tim"}
-
-<<<<<<< HEAD
-#     some_content = [
-#         {
-#             'creator': {'username': 'John Appleseed'},
-#             'content': 'This is the first piece of content'
-#         },
-
-#         {
-#             'creator': {'username': 'John Doe'},
-#             'content': 'This is another piece of content'
-#         },
-=======
     for someone in users:
         properties_list.append((someone.id, someone.username, someone.password_hash))
     
@@ -45,19 +37,11 @@ from app import app
                 session['user'] = username
                 global user
                 user = someone
-                return redirect(url_for('index'))
+                return redirect(url_for('index.html'))
 
         return "<h1>Wrong username or password - placeholder</h1>"
         
     return render_template('login.html', form=form)
->>>>>>> 0d67e4249e2bc631864b13a8ef45619c74fd1404
-
-#         {
-#             'creator': {'username': 'John Citizen'},
-#             'content': 'All this content is written by John(?)'
-#         }
-#     ]
-#     return render_template("index.html", title="Sample Title", user=user, content=some_content)
 
 @app.route('/')
 @app.route('/index')
@@ -82,14 +66,8 @@ def settings():
 def stats():
     return render_template('stats.html')
 
-#@app.route('/login')
-#def login():
-    #return render_template('login.html')
-
 #Sample from Tom's tutorial
-from app.forms import LoginForm
-from app import db
-from app.models import User
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -97,24 +75,13 @@ def register():
     form = LoginForm()
     
     if form.validate_on_submit():
-<<<<<<< HEAD
-        user = User(username=form.username.data, password_hash=form.password.data)
-=======
-        #hashed_password = 
+
         raw_password = form.password.data
         encrypted_password = sha256_crypt.hash(raw_password)
 
         user = User(username=form.username.data, password_hash=encrypted_password)
->>>>>>> 0d67e4249e2bc631864b13a8ef45619c74fd1404
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('index'))
-
-    #if form.validate_on_submit():
-    #    user = User()
-    #    
-    #    #flash('login requested for user {}, remember_me={}'.format(
-    #    #    form.username.data, form.remember_me.data))
-    #    return redirect(url_for('index'))
     
     return render_template('register.html', title='sign in', form=form)
