@@ -10,29 +10,29 @@
     <body>
 
         <div>
-            <form method="post">
-                <div>
-                    {{ form.username.label }}
-                    {{ form.username(size=20) }}
-                </div>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p style="font-family: 'Arial'">
+                    {{ form.username.label }}<br>
+                    {{ form.username(size=32) }}<br>
 
-                <div>
-                    {{ form.password.label }}
-                    {{ form.password(size=20) }}
-                    
-                </div>
-
-                <div>
-                    {{ form.submit() }}
-                </div>
-
-
+                </p>
+                <p style="font-family: 'Arial'">
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=32) }}<br>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p style="font-family: 'Arial'">{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p style="font-family: 'Arial'">{{ form.submit() }}</p>
             </form>
+
         </div>
 
-        
-
-
+        <div>
+            <a href="/register" style="font-family: 'Arial'">New to ChessleShip? Register an account here!</a>
+        </div>
 
     </body>
 
