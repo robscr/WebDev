@@ -8,16 +8,19 @@
   transform: translate(-50%, -150%) scale(0);
   padding: 20px;
   border-radius: 20px;
-  background: #131313;
+  background: #283226;
   position: absolute;
   z-index: 1;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
 }
 h1 {
   font-weight: 600;
-  padding-top: 20px;
+  padding-top: 10px;
   text-align: center;
   font-size: 32px;
   padding-bottom: 10px;
+  color: white;
 }
 
 a {
@@ -29,8 +32,8 @@ a {
   border: none;
   margin-bottom: 15px;
   color: #bfc0c0;
-  background: #262626;
-  padding: 20px;
+  background: #283226;
+  padding: 10px;
   font-size: 16px;
   border-radius: 10px;
   outline: none;
@@ -44,8 +47,7 @@ a {
   color: white;
   font-size: 18px;
   font-weight: 500;
-  background: #262626;
-
+  background: #283226;
   transition: box-shadow 0.35s ease !important;
   outline: none;
 }
