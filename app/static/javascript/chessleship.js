@@ -12,8 +12,8 @@ const NUMGUESSPERTURN = 8;
 const NUMTURNS = 8;
 
 const pieceSymbolArray = ["", "K", "Q", "R", "B"];
-//For rob to Change to 
-var turnCounter = 0;
+
+var turnCounter = 8;
 
 //GuessCounter counts the number of guesses per turn to ensure limit on number of guesses
 var guessCounter = 0;
@@ -303,7 +303,8 @@ function guess() {
   }
   //Reset guessCounter
   guessCounter = 0;
-  turnCounter++;
+  turnCounter--;
+  document.getElementById("turncount").firstChild.nodeValue = turnCounter
   resetflags();
   updateBoard();
 }
@@ -311,16 +312,18 @@ function guess() {
 function addPieceToCell(cell, src) {
   let piece_image = document.createElement("img");
   piece_image.src = src;
-  piece_image.width = "60"
-  piece_image.height = "60"
+  piece_image.width = "60";
+  piece_image.height = "60";
+  // piece_image.classsList.add();
   cell.appendChild(piece_image);
 }
 
 function addPieceByIndex(row, column, src) {
   let piece_image = document.createElement("img");
   piece_image.src = src;
-  piece_image.width = "60"
-  piece_image.height = "60"
+  piece_image.width = "60";
+  piece_image.height = "60";
+  // piece_image.classsList.add("piece","boardpiece");
   let cell = document.getElementById("board").rows[row].cells[column];
   cell.appendChild(piece_image);
 }
