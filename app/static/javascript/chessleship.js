@@ -17,7 +17,7 @@ var turnCounter = 8;
 
 //GuessCounter counts the number of guesses per turn to ensure limit on number of guesses
 var guessCounter = 0;
-//GuessCount counts total number of guesses in game 
+//GuessCount counts total number of guesses in game
 var guessCount = 0;
 
 var piecesFound = 0;
@@ -74,7 +74,7 @@ function initialisePieceTable() {
   for (var i = 0; i < pieceInfoArray.length; i++) {
     let cell = document.createElement("td");
     cell.innerHTML = " ";
-    addPieceToCell(cell,pieceNumberToImage(pieceInfoArray[i][0]))
+    addPieceToCell(cell, pieceNumberToImage(pieceInfoArray[i][0]));
     row.appendChild(cell);
   }
 }
@@ -92,9 +92,13 @@ function initialiseRightClickEvent() {
 
         let row = event.target.parentNode.rowIndex;
         let column = event.target.cellIndex;
-        let targeted = event.target
-        if(!cell.classList.contains("targeted")&&!cell.classList.contains("occupied")&&!cell.classList.contains("empty")){
-        flag(row, column, targeted);
+        let targeted = event.target;
+        if (
+          !cell.classList.contains("targeted") &&
+          !cell.classList.contains("occupied") &&
+          !cell.classList.contains("empty")
+        ) {
+          flag(row, column, targeted);
         }
         //Assigns a flag to a cell if it does not already have a flag, otherwise removes the flag
       });
@@ -223,10 +227,8 @@ function showPositions() {
       switch (positionArray[i][j]) {
         case occupied:
           cell.classList.add("occupied");
-          let image = pieceNumberToImage(
-            checkPieceType(i, j, pieceInfoArray)
-          );
-          addPieceByIndex(i,j,image);
+          let image = pieceNumberToImage(checkPieceType(i, j, pieceInfoArray));
+          addPieceByIndex(i, j, image);
           break;
 
         case empty:
@@ -254,17 +256,18 @@ function selectCell(cell) {
     !cell.classList.contains("selected") &&
     !cell.classList.contains("guessed") &&
     guessCounter < NUMGUESSPERTURN &&
-    turnCounter > 0
+    turnCounter > 0 &&
+    piecesFound != pieceInfoArray.length
   ) {
     guessCounter++;
     guessCount++;
-    document.getElementById("guesscount").firstChild.nodeValue = guessCount
+    document.getElementById("guesscount").firstChild.nodeValue = guessCount;
     cell.classList.add("selected");
   } else {
     if (cell.classList.contains("selected")) {
       guessCounter--;
       guessCount--;
-      document.getElementById("guesscount").firstChild.nodeValue = guessCount
+      document.getElementById("guesscount").firstChild.nodeValue = guessCount;
     }
     cell.classList.remove("selected");
   }
@@ -288,7 +291,7 @@ function guess() {
             let image = pieceNumberToImage(
               checkPieceType(i, j, pieceInfoArray)
             );
-            addPieceByIndex(i,j,image)
+            addPieceByIndex(i, j, image);
             break;
 
           case empty:
@@ -304,19 +307,21 @@ function guess() {
     }
   }
   //Reset guessCounter
-  guessCounter = 0;
-  turnCounter--;
-  document.getElementById("turncount").firstChild.nodeValue = turnCounter
-  resetflags();
-  updateBoard();
-  //if run out of turns and not all pieces found
-  if (turnCounter==0 && piecesFound == pieceInfoArray.length) {
-    endGameFail();
+  if (guessCounter > 0) {
+    guessCounter = 0;
+    turnCounter--;
+    document.getElementById("turncount").firstChild.nodeValue = turnCounter;
+    resetflags();
+    updateBoard();
+    //if run out of turns and not all pieces found
+    if (turnCounter == 0 && piecesFound != pieceInfoArray.length) {
+      endGameFail();
+    }
   }
 }
 // var ent = document.getElementById("ent");
 // ent.addEventListener("keydown", function (e) {
-//   if (e.code === "Enter") {  
+//   if (e.code === "Enter") {
 //     guess();
 //   }
 // });
@@ -339,7 +344,6 @@ function addPieceByIndex(row, column, src) {
   let cell = document.getElementById("board").rows[row].cells[column];
   cell.appendChild(piece_image);
 }
-
 
 /**
  * Checks the type of piece that is on the cell located by parameters row and column
@@ -389,12 +393,12 @@ function removeFromPieceTable(pieceType, pieceInfoArray) {
       !cell.classList.contains("found")
     ) {
       cell.classList.add("found");
-      piecesFound ++;
+      piecesFound++;
       break;
     }
   }
-  if (piecesFound == pieceInfoArray.length){
-   endGameSuccess();
+  if (piecesFound == pieceInfoArray.length) {
+    endGameSuccess();
   }
 }
 
@@ -406,9 +410,8 @@ function updateBoard() {
         if (positionArray[i][j] == 0) {
           cell.classList.remove("targeted");
           cell.classList.add("empty");
-          cell.firstChild.nodeValue = ' ';
-        }
-        else {
+          cell.firstChild.nodeValue = " ";
+        } else {
           cell.firstChild.nodeValue = positionArray[i][j];
         }
       }
@@ -441,9 +444,7 @@ function endGameFail() {
   alert("Run out of turns");
 }
 
-
 function main() {
-  
   positionArray = initialiseEmpty();
   pieceInfoArray = generateGameParameters(generateSeed());
   flagArray = initialiseEmpty();
@@ -454,6 +455,4 @@ function main() {
   initialiseRightClickEvent();
 
   initialisePieces(pieceInfoArray);
-  
 }
-
