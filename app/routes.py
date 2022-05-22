@@ -96,9 +96,12 @@ def register():
         raw_password = form.password.data
         encrypted_password = sha256_crypt.hash(raw_password)
 
-        user = User(username=form.username.data, password_hash=encrypted_password)
+        user = User(username=form.username.data, password_hash=encrypted_password, games_played=0, average_guesses=0.0)
         db.session.add(user)
         db.session.commit()
+
+        session['user'] = form.username.data
+        session['id'] = user.id
         return redirect(url_for('index'))
 
     #if form.validate_on_submit():
@@ -110,24 +113,32 @@ def register():
     
     return render_template('register.html', title='sign in', form=form)
 
-show_clicked = 0
+
+#Decorators to handle user stat tracking
 @app.route('/gameplay', methods=['GET', 'POST'])
 def gameplay():
     if request.method == 'POST':
 
         user_id = session['id']
         user = User.query.get(user_id)
-        user.games_played = User.games_played + 2
+        user.games_played = User.games_played + 1
+
         db.session.commit()
 
-        games_played = User.query.get(user_id).games_played
-        
-        
-        return render_template("chessleship.html", games_played=games_played)
+        return render_template("chessleship.html")
 
     return render_template('index.html')
-    #Get webpage to POST that game has been played
 
-    #receive the POST information
-    #retrieve the games_played value for the user from the database
-    #increment it by one
+@app.route('/guess', methods=['GET', 'POST'])
+def guess():
+    if request.method == 'POST':
+
+        user_id = session['id']
+        user = User.query.get(user_id)
+        user.average_guesses = User.average_guesses + 1
+
+        db.session.commit()
+
+        return render_template("chessleship.html")
+
+    return render_template('index.html')
