@@ -9,3 +9,6 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('remember me?')
     
     submit = SubmitField('sign in')
+
+class PostData(FlaskForm):
+    data = SubmitField('data')
