@@ -32,7 +32,7 @@
             <a class="nav-link" href="rules.html">Rules</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="register.html">Log In</a>
+            <a class="nav-link" href="login.html">Log In</a>
           </li>
           <span class="navbar-text">CHESSLESHIP</span>
           <li class="nav-item">
@@ -54,23 +54,18 @@
     </div>
   
     <div class="stat-container">
-      <div class="stat">0</div>
+      <div class="stat">{{ average_guesses }}</div>
       <div class="label">Average Squares</div>
     </div>
   
-    <div class="stat-container">
-      <div class="stat">0</div>
-      <div class="label">Average percentile</div>
-    </div>
-  
-    <div class="stat-container">
-      <div class="stat">0</div>
-      <div class="label">Playing Streak</div>
-    </div>
   </div>
       <h1 class="sub">LeaderBoard</h1>
       <div class="table-container">
-
+        <table>
+          <tr><td style="color:black">{{ top_1_user }}</td><td style="color:black">{{ top_1_score }}</td></tr>
+          <tr><td style="color:black">{{ top_2_user }}</td><td style="color:black">{{ top_2_score }}</td></tr>
+          <tr><td style="color:black">{{ youser }}</td><td style="color:black">{{ youser_score }}</td></tr>
+        </table>
       </div>
   </div>
     </div>
