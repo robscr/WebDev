@@ -14,19 +14,7 @@
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
-h1 {
-  font-weight: 600;
-  padding-top: 10px;
-  text-align: center;
-  font-size: 32px;
-  padding-bottom: 10px;
-  color: white;
-}
 
-a {
-  font-weight: 600;
-  color: white;
-}
 
 .input-field .validate {
   border: none;
@@ -90,5 +78,8 @@ p {
     left:0px;
     z-index:1000;
     display:flex;
+}
+#popup-header{
+  color: white;
 }
 

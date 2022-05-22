@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js?ver=1.4.2'></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/chessleship.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}" />
     <script src="{{ url_for('static', filename='javascript/chessleship.js') }}"></script>
     <script src="{{ url_for('static', filename='javascript/flags.js') }}"></script>
     <script src="{{ url_for('static', filename='javascript/aleaPRNG-1.1.js') }}"></script>
@@ -44,7 +45,29 @@
     </div>
   </nav>
 
-  <body onload="main()">
+  <body onload="main(),togglePopup()">
+    <script>
+      function togglePopup() {
+        document.getElementById("popup-1")
+         .classList.toggle("active");
+       }</script>
+    <div class="popup" id="popup-1">
+      <div class="content">
+    
+        <!--Cancel Button-->
+        <div class="close-btn" onclick="togglePopup()"><sup>x</sup></div>
+            <!--Login Form-->
+            <h1 id="popup-header">Sign in</h1> 
+            <div class="input-field">
+            </div>
+
+        <p>See how you compare to other players. <a href="stats.html">See Stats</a></p>
+            <!--Pop-up Button-->
+        
+      </div>
+    </div>
+    
+    
     <div class="container-fluid">
       <h1>Chessleship</h1>
       <h2>A Chess-Themed Cross Between Minesweeper, Battleships and Wordle</h2>
