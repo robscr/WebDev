@@ -7,7 +7,7 @@ from app import db
 from app.models import User
 
 from passlib.hash import sha256_crypt
-
+"""
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
@@ -49,20 +49,13 @@ def login():
         return "<h1>Wrong username or password - placeholder</h1>"
         
     return render_template('login.html', form=form)
+"""
 
-
-@app.route('/')
-@app.route('/index')
-@app.route('/chessleship')
-@app.route('/chessleship.html')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+@app.route('/chessleship', methods=['GET', 'POST'])
+@app.route('/chessleship.html', methods=['GET', 'POST'])
 def index():
-    #Require login to access game:
-    # ('user' in session and session['user'] == user[1]):
-    #    return render_template('chessleship.html')
-
-    #return redirect(url_for('login'))
-
-    ###Trying this code:
     form = LoginForm()
 
     users = User.query.all()
@@ -95,7 +88,7 @@ def index():
                 session['id'] = session_id
                 global user
                 user = someone
-                return redirect(url_for('index'), form=form)
+                return redirect(url_for('index'), active_session=session['user'])
 
         return "<h1>Wrong username or password - placeholder</h1>"
         
