@@ -1,0 +1,40 @@
+body{
+    color: rgb(27, 18, 18);
+    text-align: center;
+    font-family: Sans-serif;
+    text-transform:uppercase;
+}
+#rule_functions{
+    text-transform:uppercase;
+    font-size: large;
+    color: rgb(27, 18, 18);
+    text-align: center;
+    font-family: Sans-serif;
+    margin-left:33vw;
+    margin-right:33vw;
+}
+.rule_desc{
+    color: rgb(27, 18, 18);
+
+    font-family: Sans-serif;
+}
+#rules_squares{
+    font-size:large;
+    text-transform: none;
+    margin-left:33vw;
+}
+
+.rules_board{
+    font-size: small;
+    width: 30vmin !important;
+    height:30vmin !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+.example-container{
+    justify-content: center;
+}
+
+td{
+    font-size: 2vmin!important;
+}
