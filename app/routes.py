@@ -61,6 +61,45 @@ def index():
     #    return render_template('chessleship.html')
 
     #return redirect(url_for('login'))
+
+    ###Trying this code:
+    form = LoginForm()
+
+    users = User.query.all()
+    properties_list = []
+
+    for someone in users:
+        properties_list.append((someone.id, someone.username, someone.password_hash))
+    
+    hash_list = []
+
+    for someone in users:
+        hash_list.append(someone.password_hash)
+
+    if form.validate_on_submit():
+
+        if request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+        
+        for someone in users:
+            session_id = someone.id
+            try:
+                hashed = User.query.all()[someone.id].password_hash
+                verification = sha256_crypt.verify(password, hashed)
+            except:
+                pass
+            
+            if (username == someone.username) and (verification == True):
+                session['user'] = username
+                session['id'] = session_id
+                global user
+                user = someone
+                return redirect(url_for('index'))
+
+        return "<h1>Wrong username or password - placeholder</h1>"
+        
+    #return render_template('login.html', form=form)
     return render_template('chessleship.html')
 
 @app.route('/rules')
