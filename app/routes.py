@@ -109,3 +109,12 @@ def register():
     #    return redirect(url_for('index'))
     
     return render_template('register.html', title='sign in', form=form)
+
+@app.route('/gameplay', methods=['POST'])
+def gameplay():
+    pass
+    #Get webpage to POST that game has been played
+
+    #receive the POST information
+    #retrieve the games_played value for the user from the database
+    #increment it by one
