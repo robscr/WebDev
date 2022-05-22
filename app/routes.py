@@ -38,6 +38,7 @@ def login():
 
 @app.route('/')
 @app.route('/index')
+@app.route('/chessleship')
 @app.route('/chessleship.html')
 def index():
     if ('user' in session and session['user'] == user[1]):
@@ -63,6 +64,7 @@ def stats():
 
 #Sample from Tom's tutorial
 @app.route('/register', methods=['GET', 'POST'])
+@app.route('/register.html', methods=['GET', 'POST'])
 def register():
     
     form = LoginForm()
