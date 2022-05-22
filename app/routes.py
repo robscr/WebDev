@@ -6,7 +6,7 @@ from app.forms import LoginForm
 from app import db
 from app.models import User
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     users = User.query.all()
@@ -32,12 +32,12 @@ def login():
                 verification = sha256_crypt.verify(password, hashed)
             except:
                 pass
-            
+
             if (username == someone.username) and (verification == True):
                 session['user'] = username
                 global user
                 user = someone
-                return redirect(url_for('index.html'))
+                return redirect(url_for('index'))
 
         return "<h1>Wrong username or password - placeholder</h1>"
         
@@ -47,9 +47,8 @@ def login():
 @app.route('/index')
 @app.route('/chessleship.html')
 def index():
-    #if session.get('logged_in'):
-    #    return render_template('chessleship.html')
-    return render_template('chessleship.html')
+    form = LoginForm()
+    return render_template('chessleship.html', form=form)
 
 @app.route('/rules')
 @app.route('/rules.html')
