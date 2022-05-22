@@ -309,6 +309,10 @@ function guess() {
   document.getElementById("turncount").firstChild.nodeValue = turnCounter
   resetflags();
   updateBoard();
+  //if run out of turns and not all pieces found
+  if (turnCounter==0 && piecesFound == pieceInfoArray.length) {
+    endGameFail();
+  }
 }
 // var ent = document.getElementById("ent");
 // ent.addEventListener("keydown", function (e) {
@@ -390,9 +394,7 @@ function removeFromPieceTable(pieceType, pieceInfoArray) {
     }
   }
   if (piecesFound == pieceInfoArray.length){
-    alert("Found all the pieces");
-    
-    // cell.classList.add("allfound");
+   endGameSuccess();
   }
 }
 
@@ -428,6 +430,15 @@ function pieceNumberToImage(number) {
     case 4:
       return "static/images/bishop.svg";
   }
+}
+
+function endGameSuccess() {
+  alert("Found all the pieces");
+  // cell.classList.add("allfound");
+}
+
+function endGameFail() {
+  alert("Run out of turns");
 }
 
 
