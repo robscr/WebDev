@@ -37,7 +37,10 @@
           <span class="navbar-text">CHESSLESHIP</span>
           <li class="nav-item">
             <a class="nav-link active" href="stats.html">Stats</a>
-          </li>
+          <!-- </li>
+          <li class="nav-item">
+            <a class="nav-link active" onclick="togglePopup()">Login</a>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -59,13 +62,13 @@
             <!--Login Form-->
             <h1>Sign in</h1> 
             <div class="input-field">
-              <div class="validate">{{ form.username.label }}{{ form.username(size=20)}}</div>
+              <div class="validate">{{form.username.label}}{{form.username(size=32)}}</div>
             </div>
             <div class="input-field">
-              <div class="validate">{{ form.password.label }}{{ form.password(size=20) }}</div>
+              <div class="validate">{{form.password.label}}{{form.password(size=32)}}</div>
             </div>
               
-            <button class="second-button">{{ form.submit() }}</button>
+            <button class="second-button">{{form.submit()}}</button>
         <p>Don't have an account? <a href="register">Sign Up</a></p>
             <!--Pop-up Button-->
         
