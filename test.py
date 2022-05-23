@@ -26,22 +26,27 @@ class UserModelCase(unittest.TestCase):
     def testUserDetails(self):
         user = User.query.get(1)
         self.assertEqual(user.username,"lachy")
-        self.assertEqual(user.games_played, 0,"lachy")
-        self.assertEqual(user.average_guesses, 0,"lachy")
+        self.assertEqual(user.games_played, 0)
+        self.assertEqual(user.average_guesses, 0)
         self.assertTrue(user.check_password("Test"))
         self.assertFalse(user.check_password("aest"))
 
     def testAddGuesses(self):
         user = User.query.get(1)
         user.average_guesses = User.average_guesses + 32
-        self.assertEqual(user.average_guesses, 32,"lachy")
+        self.assertEqual(user.average_guesses, 32)
         user.average_guesses = User.average_guesses + 1
-        self.assertEqual(user.average_guesses, 33,"lachy")
+        self.assertEqual(user.average_guesses, 33)
 
     def testAddGames(self):
         user = User.query.get(1)
         user.games_played = User.games_played + 1
-        self.assertEqual(user.average_guesses, 1,"lachy")
+        self.assertEqual(user.average_guesses, 1)
+
+    def testAverage(self):
+        user = User.query.get(2)
+        average_guess = round(float(user.average_guesses) / float(user.games_played))
+        self.assertEqual(average_guess,10)
 
         
 
