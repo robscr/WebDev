@@ -85,7 +85,7 @@ After pulling from main, push to your branch on origin (e.g. origin Lachy) to ke
    
     -Prevent pieces from attacking through other pieces
     
-    -Piece Color and Board Direction
+    -Addition of Pawns with Piece Color and Board Direction
 ## References
 Background Images used:
 https://c4.wallpaperflare.com/wallpaper/667/940/933/5bd2c908734aa-wallpaper-preview.jpg
