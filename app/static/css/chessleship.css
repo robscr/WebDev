@@ -256,3 +256,6 @@ th, td{
   background-image: url("/static/images/bishop.svg") !important;
 }
 
+#show_positions{
+  visibility: hidden;
+}
