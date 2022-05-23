@@ -66,3 +66,11 @@ Be sure to commit regularly, to provide robust version control. Probably also a 
 
 ## Pulling from Main
 After pulling from main, push to your branch on origin (e.g. origin Lachy) to keep that branch up to date
+
+## References
+Background Images used:
+https://c4.wallpaperflare.com/wallpaper/667/940/933/5bd2c908734aa-wallpaper-preview.jpg
+https://www.sheknows.com/wp-content/uploads/2020/11/queens-gambit.jpg?w=695&h=391&crop=1
+
+Chess Pieces from:
+https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
