@@ -8,7 +8,7 @@ body{
     background: url("/static/images/chessA.jpg") no-repeat center fixed;
     background-size: cover;
     background-blend-mode:color;
-    background-color: #b3b3b349 !important;
+    background-opac;
     width: 100%;
     height: 150%;
   }
@@ -19,10 +19,15 @@ body{
     text-align: center;
     font-size: calc( 0.5vh + 1vw);
 }
-.rule_desc{
+p{
     color: rgb(27, 18, 18);
     font-family: "Courier New", Courier, monospace;
     font-weight: bold;
+    text-transform:uppercase;
+    font-size: large;
+    color: rgb(27, 18, 18);
+    text-align: center;
+    font-size: calc( 0.5vh + 1vw);
 } 
 #rules_squares{
     font-size:large;
@@ -58,4 +63,5 @@ body{
     justify-content: center;
     /* min-height: 35vh; */
 }
+
 
