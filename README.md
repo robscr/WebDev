@@ -1,7 +1,7 @@
 # Chessle-Ship
 Chessle-Ship is a game of strategy to successfully locate the pieces on the board. It combines the ship-sinking strategy of battleship with the game environment of chess.
 
-To run Chessle-Ship, clone this repository to your local machine. Ensure that you have installed all dependencies and the flask server is running, then enjoy plating Chessle-Ship in your localhost on the browser.
+To run Chessle-Ship, clone this repository to your local machine. Ensure that you have installed all dependencies and the flask server is running, then enjoy playing Chessle-Ship in your localhost on the browser.
 
 ## Installing and Setting Up Virtual Environment on Linux
     $ python3 -m venv .venv
