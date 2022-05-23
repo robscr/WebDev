@@ -1,0 +1,27 @@
+body{
+    background-color:rgba(66, 96, 66, 0.236);
+}
+.register{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    text-transform:uppercase;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.regLink{
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: large;
+    font-size: calc(60% + 1vh +1vw);
+}
+
+p{
+    font-size: calc(60% + 1vh +1vw);
+}
