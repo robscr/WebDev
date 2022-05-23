@@ -46,7 +46,7 @@ def login():
                 session['id'] = session_id
                 global user
                 user = someone
-                login_user(user, remember=True)
+                login_user(user, remember=form.remember_me.data)
                 return redirect(url_for('index'))
 
         return render_template('login.html', form=form, error_message="[INVALID USERNAME OR PASSWORD]")
@@ -143,7 +143,7 @@ def register():
 
         session['user'] = form.username.data
         session['id'] = user.id
-        login_user(user, remember=True)
+        login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
 
     #if form.validate_on_submit():
