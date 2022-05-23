@@ -68,13 +68,23 @@ Be sure to commit regularly, to provide robust version control. Probably also a 
 After pulling from main, push to your branch on origin (e.g. origin Lachy) to keep that branch up to date
 ## Next Steps
 1. Implement Practice mode 
+
     -seed js is already set up, generating a random seed number will produce random board
+    
 2. Only play Daily puzzle once a day
+
     -logic must be implemented on finished game with database to not allow daily puzzle to be repeated or not add to stats
+    
 3. Deployment
-4. Adding Hard Mode
+
+5. Addition of animations and sound effects
+
+5. Adding Hard Mode
+
     -Addition of Knights
+   
     -Prevent pieces from attacking through other pieces
+    
     -Piece Color and Board Direction
 ## References
 Background Images used:
