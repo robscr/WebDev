@@ -4,30 +4,41 @@
     <meta charset="utf-8" />
     <title>CHESSLESHIPrules</title>
     <meta name="description" content="" />
-        
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/chessleship.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/rules.css') }}">
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/chessleship.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/rules.css') }}"
+    />
     <script src="{{ url_for('static', filename='javascript/chessleship.js') }}"></script>
     <script src="{{ url_for('static', filename='javascript/aleaPRNG-1.1.js') }}"></script>
     <script src="{{ url_for('static', filename='javascript/seed-positions.js') }}"></script>
 
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
   </head>
- 
+
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="chessleship.html">♔</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mynavbar"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
-          
           <li class="nav-item">
             <a class="nav-link" href="chessleship.html">Back to Game</a>
           </li>
@@ -35,7 +46,7 @@
             <a class="nav-link" href="stats">Stats</a>
           </li>
           <span class="navbar-text">CHESSLESHIP</span>
-    
+
           <li class="nav-item">
             {%if current_user.is_authenticated%}
             <a class="nav-link active" href="logout">Log Out</a>
@@ -50,31 +61,39 @@
   <body>
     <div class="page-container">
       <h1>HOW TO PLAY CHESSLESHIP!</h1>
-      <p class="rule_desc" id="rule_functions">
-          Try to uncover all the hidden pieces with the least amount of guesses.<br><br>
-          Select up to 8 Squares with mouse/touch and press guess to uncover. <br>(This is 1 turn, but be careful you only have 8)<br><br>
-          Left click or press the "Flag" button to flag for a piece.<br> (keep clcking to cycle through or unflag) <br><br>
+      <h2>AIM</h2>
+      <p>
+        The aim of Chessleship is to uncover all the hidden pieces with the
+        least amount of squares guessed.<br /><br />
       </p>
-      <div class="example-container">
-        <div class="row">
-          <!-- <div class="col-sm-0"></div> -->
-          
-        
-          <div class="rule_desc col-12" id="rules_squares">
-              <br>
-              Yellow Squares- Targeted by 1 or more pieces<br>
-              The number in the Yellow Cells indicates how many STILL HIDDEN pieces target that square<br><br>
-              Red Squares- You've Found a Piece!<br>
-              The letter in the square tells you which one<br><br>
-              Black Squares- Uh oh! No piece is targetting this square<br>
-          </div>
-          <div class="boardex-container">
-            <img class="example" src="/static/images/examplegame.jpg">
-          </div>
-        </div>    
+      <h2>Guesses and Turns</h2>
+      <p>
+        You have a maximum of 8 turns to reveal all the pieces, and want to use
+        as few guesses as possible across those turns.<br /><br />
+        Each turn, you can guess up to 8 squares by selecting them with
+        mouse/touch. The less squares you guess, the better your score will
+        be. You can deselect a selected square by pressing it again. <br />
+        To end your turn, press the 'Guess' button. <br />
+        You can flag a square by right clicking (long press on mobile) on it to
+        cycle through the pieces. <br />
+        Flagging can be useful for keeping track of where pieces may be.<br /><br />
+      </p>
+      <h2>Board Information</h2>
+      <p>After you guess specific squares, information about the board state is revealed through different coloured squares:<br><br>
+        Black Squares - this square is empty and is not being targeted by any pieces<br><br>
+        Red Squares - congratulations! You have revealed one of the pieces. It has ceased being active and targeting other squares.<br><br>
+        Yellow Squares - the square is empty but is being targeted by the number of active pieces displayed on the square. <br>
+        As pieces are revealed and 'taken off the board', the number of active pieces targeting a square may decrease.<br><br>
+        <h2>Additional Information</h2>
+        <p>If you fail to reveal all the pieces within 8 turns, 32 will be added to your score (number of guesses taken).<br>
+          This means you have to weigh up getting a lower score by guessing less pieces per turn, and increasing your risk of not revealing all the piece in time and losing<br>
+          Note: pieces can target squares through other pieces, and can target each other (however information on the number of pieces targeting an occupied cell is not available)</p>
+
+      </p>
+        <div class="boardex-container">
+          <img class="example" src="/static/images/examplegame.jpg" />
+        </div>
       </div>
     </div>
-    
   </body>
-    
 </html>
