@@ -90,13 +90,13 @@ def stats():
         this_user = session['user']
         identity = session['id']
         num_games = User.query.get(int(identity)).games_played
-        num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 4)
+        num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 1)
 
         users = User.query.all()
         stats_list = []
 
         for user in users:
-            average_guess = round(float(user.average_guesses) / float(user.games_played))
+            average_guess = round(float(user.average_guesses) / float(user.games_played), 1)
             stats_list.append((average_guess, user.username))
         stats_list = sorted(stats_list)
 
@@ -178,6 +178,20 @@ def guess():
         user_id = session['id']
         user = User.query.get(user_id)
         user.average_guesses = User.average_guesses + 1
+
+        db.session.commit()
+
+        return render_template("chessleship.html")
+
+    return render_template('index.html')
+
+@app.route('/lose', methods=['GET', 'POST'])
+def lose():
+    if request.method == 'POST':
+
+        user_id = session['id']
+        user = User.query.get(user_id)
+        user.average_guesses = User.average_guesses + 32
 
         db.session.commit()
 
