@@ -38,6 +38,11 @@ class UserModelCase(unittest.TestCase):
         user.average_guesses = User.average_guesses + 1
         self.assertEqual(user.average_guesses, 33,"lachy")
 
+    def testAddGames(self):
+        user = User.query.get(1)
+        user.games_played = User.games_played + 1
+        self.assertEqual(user.average_guesses, 1,"lachy")
+
         
 
 if __name__ == "main":
