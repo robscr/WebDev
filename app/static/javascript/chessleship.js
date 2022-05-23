@@ -451,6 +451,7 @@ function endGameFail() {
   document.getElementById("popup-header").innerHTML = "You Lose"
   togglePopup();
   $.post('/gameplay');
+  $.post('/lose');
 }
 
 function main() {
