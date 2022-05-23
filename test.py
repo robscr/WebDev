@@ -6,6 +6,8 @@ class UserModelCase(unittest.TestCase):
 
     def setUp(self):
         basedir = os.path.abspath(os.path.dirname(__file__))
+        app.config['TESTING'] = True
+        app.config['WTF_CSRF_ENABLED'] = False
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "test.db")
         self.app = app.test_client() # create virtual test env
         db.create_all()
@@ -21,3 +23,22 @@ class UserModelCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
+    def testUserDetails(self):
+        user = User.query.get(1)
+        self.assertEqual(user.username,"lachy")
+        self.assertEqual(user.games_played, 0,"lachy")
+        self.assertEqual(user.average_guesses, 0,"lachy")
+        self.assertTrue(user.check_password("Test"))
+        self.assertFalse(user.check_password("aest"))
+
+    def testAddGuesses(self):
+        user = User.query.get(1)
+        user.average_guesses = User.average_guesses + 32
+        self.assertEqual(user.average_guesses, 32,"lachy")
+        user.average_guesses = User.average_guesses + 1
+        self.assertEqual(user.average_guesses, 33,"lachy")
+
+        
+
+if __name__ == "main":
+    unittest.main()
