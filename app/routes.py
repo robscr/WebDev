@@ -90,15 +90,21 @@ def stats():
         this_user = session['user']
         identity = session['id']
         num_games = User.query.get(int(identity)).games_played
-        num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 1)
+        try:
+            num_guesses = round(float(User.query.get(int(identity)).average_guesses) / float(User.query.get(int(identity)).games_played), 1)
+        except:
+            num_guesses = 999
 
         users = User.query.all()
         stats_list = []
 
         for user in users:
-            average_guess = round(float(user.average_guesses) / float(user.games_played), 1)
+            try:
+                average_guess = round(float(user.average_guesses) / float(user.games_played), 1)
+            except:
+                average_guess = 999
             stats_list.append((average_guess, user.username))
-        stats_list = sorted(stats_list)
+        stats_list = sorted(stats_list, reverse=True)
 
         top_1_score = stats_list[-1][0]
         top_1_user = stats_list[-1][1]
@@ -115,12 +121,12 @@ def stats():
         top_5_score = stats_list[-5][0]
         top_5_user = stats_list[-5][1]
 
-        youser_score = num_games
+        youser_score = num_guesses
         youser = this_user
         
         return render_template('stats.html', games_played=num_games, average_guesses=num_guesses, top_1_score=top_1_score, top_2_score=top_2_score, top_3_score=top_3_score, top_4_score=top_4_score, top_5_score=top_5_score,top_1_user=top_1_user, top_2_user=top_2_user,top_3_user=top_3_user,top_4_user=top_4_user, top_5_user=top_5_user,youser_score=youser_score, youser=youser)
     except:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
 
 #Sample from Tom's tutorial
 @app.route('/register', methods=['GET', 'POST'])
