@@ -17,7 +17,7 @@ function generateSeed() {
 
 function generateGameParameters(seed) {
   seededPRNG = aleaPRNG(seed);
-  var num_pieces = seededPRNG.range(2, 5);
+  var num_pieces = seededPRNG.range(3, 5);
   console.log("Number of pieces is: " + num_pieces);
   var pieceArray = new Array(num_pieces);
 
