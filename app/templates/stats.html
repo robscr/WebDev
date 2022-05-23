@@ -49,9 +49,10 @@
     </div>
   </nav>
   <body>
-    <h1>STATS</h1>
-    <div class="container">
-      <h1 class="sub">Statistics</h1>
+    <div class="page-container-stat">
+    <h1>Statistics</h1>
+    <div class="all-container">
+      <h1 class="sub"><br>Your performance</h1>
       <div id="stat">
     <div class="stat-container">
       <div class="label">Games Played</div>
@@ -65,11 +66,10 @@
       <div class="stat">{{ average_guesses }}</div>
      
     </div>
-  
   </div>
-      <h1 class="sub">LeaderBoard</h1>
+      <h1 class="sub"><br>LeaderBoard</h1>
       <div class="table-container">
-        <table>
+        <table id="leadertable">
           <tr><td style="color:black">{{ top_1_user }}</td><td style="color:black">{{ top_1_score }}</td></tr>
           <tr><td style="color:black">{{ top_2_user }}</td><td style="color:black">{{ top_2_score }}</td></tr>
           <tr><td style="color:black">{{ top_3_user }}</td><td style="color:black">{{ top_3_score }}</td></tr>
@@ -81,7 +81,7 @@
   </div>
     </div>
 
-   
+    </div> 
   </body>
     
 </html>
